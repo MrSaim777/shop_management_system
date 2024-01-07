@@ -2,7 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
-import 'package:shop_management/colors_const.dart';
+import 'package:shop_management/utils/constants/colors_const.dart';
+import 'package:shop_management/view/screens/home_screen.dart';
 
 class BottomNavigation extends StatelessWidget {
   BottomNavigation({super.key});
@@ -10,8 +11,7 @@ class BottomNavigation extends StatelessWidget {
       PersistentTabController(initialIndex: 0);
   List<Widget> _buildScreens() {
     return [
-      const Screen1(),
-      // const Center(child: Text("Home")),
+      const HomeScreen(),
       const Center(child: Text("Sales")),
       const Center(child: Text("Add")),
       const Center(child: Text("Report")),
@@ -26,24 +26,15 @@ class BottomNavigation extends StatelessWidget {
     return [
       PersistentBottomNavBarItem(
         icon: const FaIcon(FontAwesomeIcons.house),
-        // icon: Image.asset(
-        //   AppIcons.report,
-        //   scale: h / 50,
-        //   color: AppColors.kGreyColor,
-        // ),
         title: ("Home"),
-
+        textStyle: const TextStyle(fontSize: 12),
         activeColorPrimary: CupertinoColors.activeBlue,
         inactiveColorPrimary: AppColors.kGreyColor,
       ),
       PersistentBottomNavBarItem(
         icon: const FaIcon(FontAwesomeIcons.chartSimple),
-        // icon: Image.asset(
-        //   AppIcons.sales,
-        //   scale: h / 50,
-        //   color: AppColors.kGreyColor,
-        // ),
         title: ("Sales"),
+        textStyle: const TextStyle(fontSize: 12),
         activeColorPrimary: AppColors.kPrimaryColor,
         inactiveColorPrimary: AppColors.kGreyColor,
       ),
@@ -51,31 +42,22 @@ class BottomNavigation extends StatelessWidget {
         icon: const Icon(
           CupertinoIcons.add,
         ),
+        inactiveColorSecondary: AppColors.kGreyColor,
         activeColorPrimary: AppColors.kPrimaryColor,
         inactiveColorPrimary: AppColors.kWhiteColor,
         activeColorSecondary: AppColors.kWhiteColor,
       ),
       PersistentBottomNavBarItem(
         icon: const FaIcon(FontAwesomeIcons.bars),
-
-        // icon: Image.asset(
-        //   AppIcons.report,
-        //   color: AppColors.kGreyColor,
-        //   scale: h / 50,
-        // ),
         title: ("Report"),
+        textStyle: const TextStyle(fontSize: 12),
         activeColorPrimary: AppColors.kPrimaryColor,
         inactiveColorPrimary: AppColors.kGreyColor,
       ),
       PersistentBottomNavBarItem(
         icon: const FaIcon(FontAwesomeIcons.cartFlatbed),
-
-        // icon: Image.asset(
-        //   AppIcons.boxes,
-        //   color: AppColors.kGreyColor,
-        //   scale: h / 50,
-        // ),
         title: ("Inventory"),
+        textStyle: const TextStyle(fontSize: 12),
         activeColorPrimary: AppColors.kPrimaryColor,
         inactiveColorPrimary: AppColors.kGreyColor,
       ),
