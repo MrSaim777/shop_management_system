@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 import 'package:shop_management/utils/constants/colors_const.dart';
 
 class ProgressWithText extends StatefulWidget {
@@ -52,7 +53,7 @@ class _ProgressWithTextState extends State<ProgressWithText>
 
   @override
   Widget build(BuildContext context) {
-    double w = (MediaQuery.sizeOf(context).width / 2) - 35;
+    double w = (context.screenWidth / 2) - 35;
     return Stack(
       children: [
         Align(
