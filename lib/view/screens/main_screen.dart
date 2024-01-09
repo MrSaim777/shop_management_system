@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 import 'package:shop_management/utils/constants/colors_const.dart';
+import 'package:shop_management/view/animations/floating_bubbles.dart';
 import 'package:shop_management/view/screens/home_screen.dart';
 import 'package:shop_management/view/widgets/drawer.dart';
 import 'package:shop_management/view/widgets/drawer_btn.dart';
@@ -90,7 +91,11 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      
+      floatingActionButton: Padding(
+        padding: EdgeInsets.only(bottom: context.screenHeight / 15),
+        child: const CustomFloatingButton(),
+      ),
       appBar: AppBar(
         title: Text(widget.title),
         centerTitle: true,
