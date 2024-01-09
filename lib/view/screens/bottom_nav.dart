@@ -5,6 +5,7 @@ import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 import 'package:shop_management/utils/constants/colors_const.dart';
 import 'package:shop_management/view/screens/inventory_screen.dart';
 import 'package:shop_management/view/screens/main_screen.dart';
+import 'package:shop_management/view/screens/report_screen.dart';
 import 'package:shop_management/view/screens/sales_screen.dart';
 
 class BottomNavigation extends StatelessWidget {
@@ -16,7 +17,7 @@ class BottomNavigation extends StatelessWidget {
       const MainScreen(),
       const SalesScreen(),
       // const Center(child: Text("Add")),
-      const Center(child: Text("Report")),
+      const ReportScreen(),
       const InventoryScreen()
     ];
   }

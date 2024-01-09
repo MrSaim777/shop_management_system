@@ -5,6 +5,8 @@ double deviceWidth = 0;
 double deviceHeight = 0;
 double deviceAverageSize = 0;
 double textSizeRegular = 0.027;
+double containerBorderBig = 20.0;
+double containerBorderCircularSmall = 50.0;
 
 TextStyle appTextStyle(
         {FontWeight? fontWeight, double? fontSize, Color? color}) =>
@@ -13,3 +15,16 @@ TextStyle appTextStyle(
         fontSize: deviceAverageSize * (fontSize ?? textSizeRegular),
         decoration: TextDecoration.none,
         fontWeight: fontWeight ?? FontWeight.normal);
+
+List<BoxShadow> boxShadow = [
+  BoxShadow(
+      blurRadius: 1,
+      color: AppColors.kTransparentColor.withOpacity(.1),
+      spreadRadius: 1,
+      offset: const Offset(0, 2)),
+  BoxShadow(
+      blurRadius: 1,
+      color: AppColors.kTransparentColor.withOpacity(.1),
+      spreadRadius: 1,
+      offset: const Offset(2, 0)),
+];

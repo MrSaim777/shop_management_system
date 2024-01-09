@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:shop_management/utils/constants/constant_strings.dart';
 
 class HomeViewModel extends ChangeNotifier {
-  bool _isPressed = false;
-  bool get isPressed => _isPressed;
+  bool _isFloatingBtnPressed = false;
+  bool get isFloatingBtnPressed => _isFloatingBtnPressed;
   bool _isSaveBtn = false;
   bool get isSaveBtn => _isSaveBtn;
+  int _productAssetsIndex = 0;
+  int get productAssetsIndex => _productAssetsIndex;
 
   final TextEditingController _productTextController = TextEditingController();
   TextEditingController get productTextController => _productTextController;
@@ -13,7 +16,7 @@ class HomeViewModel extends ChangeNotifier {
   TextEditingController get assetTextController => _assetTextController;
 
   toggle() {
-    _isPressed = !isPressed;
+    _isFloatingBtnPressed = !isFloatingBtnPressed;
     notifyListeners();
   }
 
@@ -23,6 +26,16 @@ class HomeViewModel extends ChangeNotifier {
       notifyListeners();
     } else {
       _isSaveBtn = true;
+      notifyListeners();
+    }
+  }
+
+  selectProductAssetIndex(String value) {
+    if (value == ConstantStrings.products) {
+      _productAssetsIndex = 0;
+      notifyListeners();
+    } else {
+      _productAssetsIndex = 1;
       notifyListeners();
     }
   }

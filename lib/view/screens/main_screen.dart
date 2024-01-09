@@ -4,7 +4,6 @@ import 'package:shop_management/utils/constants/colors_const.dart';
 import 'package:shop_management/view/animations/floating_bubbles.dart';
 import 'package:shop_management/view/screens/home_screen.dart';
 import 'package:shop_management/view/widgets/drawer.dart';
-import 'package:shop_management/view/widgets/drawer_btn.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({Key? key}) : super(key: key);
@@ -48,7 +47,7 @@ class _MainScreenState extends State<MainScreen> {
         return MainScreenWidget(
           title: "Home",
           zoomDrawerController: zoomDrawerController,
-          body: const HomeScreen(),
+          body:  HomeScreen(zoomDrawerController: zoomDrawerController),
         );
       case 1:
         return MainScreenWidget(
@@ -91,17 +90,16 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      
       floatingActionButton: Padding(
         padding: EdgeInsets.only(bottom: context.screenHeight / 15),
         child: const CustomFloatingButton(),
       ),
-      appBar: AppBar(
-        title: Text(widget.title),
-        centerTitle: true,
-        leading:
-            AppDrawerButton(zoomDrawerController: widget.zoomDrawerController),
-      ),
+      // appBar: AppBar(
+      //   title: Text(widget.title),
+      //   centerTitle: true,
+      //   leading:
+      //       AppDrawerButton(zoomDrawerController: widget.zoomDrawerController),
+      // ),
       body: widget.body,
     );
   }

@@ -23,6 +23,7 @@ class MyApp extends StatelessWidget {
           )
         ],
         child: MaterialApp(
+          debugShowCheckedModeBanner: false,
           title: 'Lahori Milk Shop',
           theme: ThemeData(
             colorScheme:

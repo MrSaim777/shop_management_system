@@ -195,7 +195,7 @@ class _CustomFloatingButtonState extends State<CustomFloatingButton>
       iconColor: AppColors.kPrimaryColor,
 
       // Flaoting Action button Icon
-      iconData: provider.isPressed
+      iconData: provider.isFloatingBtnPressed
           // ignore: deprecated_member_use
           ? FontAwesomeIcons.close
           : FontAwesomeIcons.plus,

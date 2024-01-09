@@ -8,5 +8,8 @@ class AppColors {
   static const Color kErrorColor = Colors.red;
   static const Color kTransparentColor = Colors.transparent;
   static final kScaffoldColor = Colors.grey.shade100;
+  static const Color kIncomeColor = Colors.green;
+  static const Color kExpensesColor = Colors.red;
+
   // static const Color kScaffoldColor = Colors.white;
 }

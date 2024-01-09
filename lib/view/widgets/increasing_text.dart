@@ -50,8 +50,10 @@ class _IncreasingTextState extends State<IncreasingText>
     return Text(
       animation == null
           ? "0"
-          : animation!.value.toStringAsFixed(widget.isSingle ? 0 : 2) +
-              (widget.suffix ?? ""),
+          :(widget.suffix ?? "")+ animation!.value.toStringAsFixed(widget.isSingle ? 0 : 2) 
+          
+              
+              ,
       style: widget.style,
     );
   }
