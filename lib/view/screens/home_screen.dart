@@ -115,59 +115,89 @@ class HomeScreen extends StatelessWidget {
                           color: AppColors.kWhiteColor,
                           borderRadius: BorderRadius.circular(
                               containerBorderCircularSmall)),
-                      child: Row(
+                      // BoxDecoration(
+                      //               color: AppColors.kScaffoldColor,
+                      //               borderRadius: BorderRadius.circular(
+                      //                   containerBorderCircularSmall),
+                      //               boxShadow: boxShadow)
+                      child: Stack(
                         children: [
-                          Expanded(
+                          AnimatedPositioned(
+                            duration: const Duration(milliseconds: 200),
+                            right: homeModelView.productAssetsIndex == 0
+                                ? deviceWidth / 2
+                                : 0,
+                            left: homeModelView.productAssetsIndex == 1
+                                ? deviceWidth / 2
+                                : 0,
+                            top: 0,
+                            bottom: 0,
                             child: GestureDetector(
-                              onTap: () =>
-                                  homeModelView.selectProductAssetIndex(
-                                      ConstantStrings.products),
+                              // onHorizontalDragEnd: (dragEndDetails) {
+                              //   if (dragEndDetails.primaryVelocity! < 0) {
+                              //     homeModelView.selectProductAssetIndex(
+                              //         ConstantStrings.products);
+                              //   } else if (dragEndDetails.primaryVelocity! >
+                              //       0) {
+                              //     homeModelView.selectProductAssetIndex(
+                              //         ConstantStrings.assets);
+                              //   }
+                              // },
+                              // onHorizontalDragUpdate: (details) {
+                              //   // Update the position based on drag movement
+                              //   homeModelView
+                              //       .updatePosition(details.primaryDelta!);
+                              // },
                               child: Container(
-                                decoration:
-                                    homeModelView.productAssetsIndex != 0
-                                        ? const BoxDecoration()
-                                        : BoxDecoration(
-                                            color: AppColors.kScaffoldColor,
-                                            borderRadius: BorderRadius.circular(
-                                                containerBorderCircularSmall),
-                                            boxShadow: boxShadow),
-                                child: Center(
-                                  child: Text(
-                                    ConstantStrings.products,
-                                    style: appTextStyle(
-                                        fontSize: 0.03,
-                                        fontWeight: FontWeight.w900,
-                                        color: AppColors.kBlackColor),
-                                  ),
-                                ),
-                              ),
+                                  decoration: BoxDecoration(
+                                      color: AppColors.kScaffoldColor,
+                                      borderRadius: BorderRadius.circular(
+                                          containerBorderCircularSmall),
+                                      boxShadow: boxShadow)),
                             ),
                           ),
-                          Expanded(
-                            child: GestureDetector(
-                              onTap: () =>
-                                  homeModelView.selectProductAssetIndex(
-                                      ConstantStrings.assets),
-                              child: Container(
-                                decoration:
-                                    homeModelView.productAssetsIndex != 1
-                                        ? const BoxDecoration()
-                                        : BoxDecoration(
-                                            color: AppColors.kScaffoldColor,
-                                            borderRadius: BorderRadius.circular(
-                                                containerBorderCircularSmall),
-                                            boxShadow: boxShadow),
-                                child: Center(
-                                  child: Text(
-                                    ConstantStrings.assets,
-                                    style: appTextStyle(
-                                        fontSize: 0.03,
-                                        fontWeight: FontWeight.w900,
-                                        color: AppColors.kBlackColor),
+                          Row(
+                            children: [
+                              Expanded(
+                                child: GestureDetector(
+                                  onTap: () =>
+                                      homeModelView.selectProductAssetIndex(
+                                          ConstantStrings.products),
+                                  child: Center(
+                                    child: Text(
+                                      ConstantStrings.products,
+                                      style: appTextStyle(
+                                          fontSize: 0.03,
+                                          fontWeight: FontWeight.w900,
+                                          color: AppColors.kBlackColor),
+                                    ),
                                   ),
                                 ),
                               ),
-                            ),
+                              Expanded(
+                                child: GestureDetector(
+                                  onPanUpdate: (details) {
+                                    // Swiping in left direction.
+                                    if (details.delta.dx < 0) {
+                                      homeModelView.selectProductAssetIndex(
+                                          ConstantStrings.products);
+                                    }
+                                  },
+                                  onTap: () =>
+                                      homeModelView.selectProductAssetIndex(
+                                          ConstantStrings.assets),
+                                  child: Center(
+                                    child: Text(
+                                      ConstantStrings.assets,
+                                      style: appTextStyle(
+                                          fontSize: 0.03,
+                                          fontWeight: FontWeight.w900,
+                                          color: AppColors.kBlackColor),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
                           ),
                         ],
                       ),

@@ -8,6 +8,9 @@ class HomeViewModel extends ChangeNotifier {
   bool get isSaveBtn => _isSaveBtn;
   int _productAssetsIndex = 0;
   int get productAssetsIndex => _productAssetsIndex;
+  double containerPosition = 0.0;
+  double minValue = 0.0;
+  double maxValue = 100.0;
 
   final TextEditingController _productTextController = TextEditingController();
   TextEditingController get productTextController => _productTextController;
@@ -38,5 +41,15 @@ class HomeViewModel extends ChangeNotifier {
       _productAssetsIndex = 1;
       notifyListeners();
     }
+  }
+
+  void updatePosition(double delta) {
+    containerPosition += delta;
+
+    containerPosition = containerPosition.clamp(minValue, maxValue);
+    print(minValue);
+    print(maxValue);
+
+    notifyListeners();
   }
 }
