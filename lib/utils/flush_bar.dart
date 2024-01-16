@@ -10,13 +10,13 @@ showFlushBar(
   return Flushbar(
     message: message,
     icon: iconWidget ?? const SizedBox.shrink(),
-    duration: const Duration(seconds: 2),
+    duration: const Duration(seconds: 1),
+    dismissDirection: FlushbarDismissDirection.HORIZONTAL,
     backgroundColor: AppColors.kPrimaryColor,
     // leftBarIndicatorColor: AppColors.kPrimaryColor,
     borderRadius: BorderRadius.circular(10),
     margin: EdgeInsets.symmetric(
-        vertical: context.height / 50,
-        horizontal: context.width / 20),
+        vertical: context.height / 50, horizontal: context.width / 20),
     flushbarPosition: FlushbarPosition.TOP,
   )..show(context);
 }

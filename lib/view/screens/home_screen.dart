@@ -173,12 +173,18 @@ class HomeScreen extends StatelessWidget {
                       SizedBox(height: deviceHeight / 50),
                       homeModelView.productAssetsIndex == 0
                           ? homeModelView.productsList.isEmpty
-                              ? const Center(
-                                  child: Text(ConstantStrings.noProducts))
+                              ? SizedBox(
+                                  height: context.height / 2,
+                                  child: const Center(
+                                      child: Text(ConstantStrings.noProducts)),
+                                )
                               : ProductsList(homeModelView: homeModelView)
                           : homeModelView.assetsList.isEmpty
-                              ? const Center(
-                                  child: Text(ConstantStrings.noAssets))
+                              ? SizedBox(
+                                  height: context.height / 2,
+                                  child: const Center(
+                                      child: Text(ConstantStrings.noAssets)),
+                                )
                               : AssetsList(homeModelView: homeModelView)
                     ],
                   );
@@ -257,7 +263,7 @@ class AssetsList extends StatelessWidget {
               borderRadius: BorderRadius.circular(10)),
           child: ListTile(
             leading: CircleAvatar(
-              backgroundColor: AppColors.kPrimaryColor,
+                backgroundColor: AppColors.kPrimaryColor,
                 // backgroundColor:
                 //     Colors.primaries[Random().nextInt(Colors.primaries.length)],
                 child: Text(

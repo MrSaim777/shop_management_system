@@ -32,16 +32,16 @@ class HomeViewModel extends ChangeNotifier {
   addToList(BuildContext context, String name, String type) {
     if (name.isNotEmpty) {
       if (type == ConstantStrings.product) {
+        Navigator.pop(context);
         productsList.add(Product(name: name, dateTime: DateTime.now()));
         selectedType = "";
         showFlushBar(context: context, message: ConstantStrings.productAdded);
-        // Navigator.pop(context);
         notifyListeners();
       } else if (type == ConstantStrings.asset) {
+        Navigator.pop(context);
         assetsList.add(Asset(name: name, dateTime: DateTime.now()));
         selectedType = "";
         showFlushBar(context: context, message: ConstantStrings.assetAdded);
-        // Navigator.pop(context);
         notifyListeners();
       } else {
         showFlushBar(context: context, message: ConstantStrings.selectType);
