@@ -10,6 +10,8 @@ void main() {
   runApp(const MyApp());
 }
 
+// GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
+
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
@@ -24,7 +26,8 @@ class MyApp extends StatelessWidget {
         ],
         child: MaterialApp(
           debugShowCheckedModeBanner: false,
-          title: 'Lahori Milk Shop',
+          // navigatorKey: navigatorKey,
+          title: 'Shop Management',
           theme: ThemeData(
             colorScheme:
                 ColorScheme.fromSeed(seedColor: AppColors.kPrimaryColor),
@@ -40,7 +43,7 @@ class MyApp extends StatelessWidget {
                 data: MediaQuery.of(context).copyWith(),
                 child: widget ?? const SizedBox());
           },
-          home: BottomNavigation(),
+          home: const BottomNavigation(),
         ),
       ),
     );

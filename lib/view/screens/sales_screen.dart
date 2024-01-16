@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
-import 'package:shop_management/view/widgets/drop_downs.dart';
+import 'package:shop_management/utils/constants/colors_const.dart';
+import 'package:shop_management/utils/constants/global.dart';
+import 'package:shop_management/view/animations/fade_in.dart';
+import 'package:shop_management/view/widgets/app_card.dart';
+import 'package:shop_management/view/widgets/progress_with_text.dart';
 
 class SalesScreen extends StatelessWidget {
   const SalesScreen({super.key});
@@ -8,28 +11,40 @@ class SalesScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        children: [
-          SizedBox(
-            height: context.screenHeight / 10,
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: SimpleDropdown(
-              hintText: "Select a job",
-              list: _list,
-              onChanged: (v) {},
+      body: GridView.builder(
+        padding: EdgeInsets.symmetric(
+            horizontal: deviceWidth / 20, vertical: deviceHeight / 50),
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 2,
+          crossAxisSpacing: deviceWidth / 20,
+          mainAxisSpacing: deviceWidth / 20,
+        ),
+        itemCount: 3,
+        itemBuilder: (context, index) {
+          return FadeInAnimation(
+            delay: 2,
+            child: AppCard(
+              height: 225,
+              child: Column(
+                children: [
+                  Text(
+                    "Milk",
+                    style: appTextStyle(color: AppColors.kTextColor),
+                  ),
+                  const Expanded(
+                    child: ProgressWithText(
+                      indicatorValue: 7 / 20,
+                      title: 'Litters',
+                      value: 7,
+                      totalValue: 20,
+                    ),
+                  ),
+                ],
+              ),
             ),
-          )
-        ],
+          );
+        },
       ),
     );
   }
 }
-
-const List<String> _list = [
-  'Developer',
-  'Designer',
-  'Consultant',
-  'Student',
-];

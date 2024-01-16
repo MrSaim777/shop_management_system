@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
-import 'package:shop_management/utils/constants/colors_const.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:shop_management/utils/constants/global.dart';
+import 'package:shop_management/utils/extentions/build_context_extention.dart';
 
 class DrawerScreen extends StatefulWidget {
   final ValueSetter setIndex;
@@ -14,41 +15,60 @@ class _DrawerScreenState extends State<DrawerScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.kPrimaryColor,
+      // backgroundColor: AppColors.kWhiteColor,
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          drawerList(Icons.home, "Home", 0),
-          drawerList(Icons.account_box, "Account Management", 1),
-          drawerList(Icons.wallet, "Expense Tracing", 2),
+          drawerList(
+              FaIcon(
+                FontAwesomeIcons.house,
+                size: context.width / 15,
+              ),
+              "Home",
+              Colors.black,
+              0),
+          drawerList(
+              FaIcon(
+                FontAwesomeIcons.wallet,
+                size: context.width / 15,
+              ),
+              "Expenses",
+              Colors.black,
+              1),
+          drawerList(
+              FaIcon(
+                FontAwesomeIcons.fileInvoice,
+                size: context.width / 15,
+              ),
+              "Account Management",
+              Colors.black,
+              2),
         ],
       ),
     );
   }
 
-  Widget drawerList(IconData icon, String text, int index) {
+  Widget drawerList(FaIcon icon, String text, Color textColor, int index) {
     return GestureDetector(
       onTap: () {
         widget.setIndex(index);
       },
       child: Container(
         margin: EdgeInsets.only(
-            left: context.screenWidth / 20, bottom: context.screenHeight / 50),
+            left: context.width / 20, bottom: context.height / 50),
         child: Row(
           children: [
-            Icon(
-              icon,
-              color: Colors.white,
-            ),
+            icon,
             SizedBox(
-              width: context.screenWidth / 50,
+              width: context.width / 50,
             ),
             Expanded(
               child: Text(
                 text,
-                style: const TextStyle(
-                    color: Colors.white, fontWeight: FontWeight.bold),
+                style: appTextStyle(
+                  color: textColor,
+                ),
               ),
             ),
           ],

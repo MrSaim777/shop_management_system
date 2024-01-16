@@ -10,6 +10,8 @@ class AppColors {
   static final kScaffoldColor = Colors.grey.shade100;
   static const Color kIncomeColor = Colors.green;
   static const Color kExpensesColor = Colors.red;
+  static const Color kTextColor = Colors.black;
+  static const Color kTextLiteColor = kGreyColor;
 
   // static const Color kScaffoldColor = Colors.white;
 }

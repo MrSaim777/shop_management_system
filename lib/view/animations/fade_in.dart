@@ -50,6 +50,7 @@ class _FadeInAnimationState extends State<FadeInAnimation>
   @override
   void dispose() {
     controller.dispose();
+
     super.dispose();
   }
 }
