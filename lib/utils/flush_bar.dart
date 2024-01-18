@@ -6,11 +6,12 @@ import 'package:shop_management/utils/extentions/build_context_extention.dart';
 showFlushBar(
     {required BuildContext context,
     required String message,
-    Widget? iconWidget}) {
+    Widget? iconWidget,
+    int? seconds}) {
   return Flushbar(
     message: message,
     icon: iconWidget ?? const SizedBox.shrink(),
-    duration: const Duration(seconds: 1),
+    duration: Duration(seconds: seconds ?? 1),
     dismissDirection: FlushbarDismissDirection.HORIZONTAL,
     backgroundColor: AppColors.kPrimaryColor,
     // leftBarIndicatorColor: AppColors.kPrimaryColor,

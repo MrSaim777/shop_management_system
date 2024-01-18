@@ -1,4 +1,3 @@
-import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
@@ -7,6 +6,8 @@ import 'package:shop_management/utils/constants/colors_const.dart';
 import 'package:shop_management/utils/constants/constant_strings.dart';
 import 'package:shop_management/utils/constants/global.dart';
 import 'package:shop_management/utils/extentions/build_context_extention.dart';
+import 'package:shop_management/utils/routes/cupertino_router.dart';
+import 'package:shop_management/view/screens/detail_screen.dart';
 import 'package:shop_management/view/widgets/increasing_text.dart';
 import 'package:shop_management/view/widgets/product_expense.dart';
 import 'package:shop_management/view_model/home_view_model.dart';
@@ -47,33 +48,36 @@ class HomeScreen extends StatelessWidget {
                 ),
                 child: Column(
                   children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          ConstantStrings.profit,
-                          style: appTextStyle(
-                              color: AppColors.kTextColor,
-                              fontSize: 0.04,
-                              fontWeight: FontWeight.w900),
-                        ),
-                        SizedBox(width: deviceWidth / 30),
-                        IncreasingText(
-                          10540,
-                          suffix: ConstantStrings.currency,
-                          isSingle: true,
-                          style: appTextStyle(
-                              color: AppColors.kTextColor,
-                              fontSize: 0.04,
-                              fontWeight: FontWeight.w900),
-                        ),
-                        SizedBox(width: deviceWidth / 30),
-                        FaIcon(
-                          FontAwesomeIcons.chartLine,
-                          color: AppColors.kIncomeColor,
-                          size: deviceWidth / 22,
-                        )
-                      ],
+                    GestureDetector(
+                      onTap: () {},
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            ConstantStrings.profit,
+                            style: appTextStyle(
+                                color: AppColors.kTextColor,
+                                fontSize: 0.04,
+                                fontWeight: FontWeight.w900),
+                          ),
+                          SizedBox(width: deviceWidth / 30),
+                          IncreasingText(
+                            10540,
+                            suffix: ConstantStrings.currency,
+                            isSingle: true,
+                            style: appTextStyle(
+                                color: AppColors.kTextColor,
+                                fontSize: 0.04,
+                                fontWeight: FontWeight.w900),
+                          ),
+                          SizedBox(width: deviceWidth / 30),
+                          FaIcon(
+                            FontAwesomeIcons.chartLine,
+                            color: AppColors.kIncomeColor,
+                            size: deviceWidth / 22,
+                          )
+                        ],
+                      ),
                     ),
                     SizedBox(height: deviceHeight / 30),
                     Row(
@@ -213,26 +217,35 @@ class ProductsList extends StatelessWidget {
         final formattedDateTime =
             DateFormat("dd-MM-yyyy hh:mm a").format(list.dateTime);
 
-        return Container(
-          margin: EdgeInsets.symmetric(vertical: context.height / 200),
-          decoration: BoxDecoration(
-              color: AppColors.kWhiteColor,
-              borderRadius: BorderRadius.circular(10)),
-          child: ListTile(
-            leading: CircleAvatar(
-                backgroundColor: AppColors.kPrimaryColor,
-                child: Text(
-                  list.name[0].toUpperCase(),
-                  style: appTextStyle(
-                      color: AppColors.kWhiteColor,
-                      fontWeight: FontWeight.bold),
-                )),
-            title: Text(
-              list.name,
-              style: appTextStyle(
-                  fontWeight: FontWeight.bold, color: AppColors.kBlackColor),
+        return GestureDetector(
+          onTap: () => cupertinoRouter(context, DetailScreen(product: list)),
+          child: Container(
+            margin: EdgeInsets.symmetric(vertical: context.height / 200),
+            decoration: BoxDecoration(
+                color: AppColors.kWhiteColor,
+                borderRadius: BorderRadius.circular(10)),
+            child: ListTile(
+              leading: CircleAvatar(
+                  backgroundColor: AppColors.kPrimaryColor,
+                  child: Text(
+                    list.name[0].toUpperCase(),
+                    style: appTextStyle(
+                        color: AppColors.kWhiteColor,
+                        fontWeight: FontWeight.bold),
+                  )),
+              title: Text(
+                list.name,
+                style: appTextStyle(
+                    fontWeight: FontWeight.bold, color: AppColors.kBlackColor),
+              ),
+              subtitle: list.desc == null
+                  ? null
+                  : Text(
+                      list.desc!,
+                      style: appTextStyle(),
+                    ),
+              trailing: Text(formattedDateTime),
             ),
-            trailing: Text(formattedDateTime),
           ),
         );
       },
@@ -256,28 +269,31 @@ class AssetsList extends StatelessWidget {
         final formattedDateTime =
             DateFormat("dd-MM-yyyy hh:mm a").format(list.dateTime);
 
-        return Container(
-          margin: EdgeInsets.symmetric(vertical: context.height / 200),
-          decoration: BoxDecoration(
-              color: AppColors.kWhiteColor,
-              borderRadius: BorderRadius.circular(10)),
-          child: ListTile(
-            leading: CircleAvatar(
-                backgroundColor: AppColors.kPrimaryColor,
-                // backgroundColor:
-                //     Colors.primaries[Random().nextInt(Colors.primaries.length)],
-                child: Text(
-                  list.name[0].toUpperCase(),
-                  style: appTextStyle(
-                      color: AppColors.kWhiteColor,
-                      fontWeight: FontWeight.bold),
-                )),
-            title: Text(
-              list.name,
-              style: appTextStyle(
-                  fontWeight: FontWeight.bold, color: AppColors.kBlackColor),
+        return GestureDetector(
+          // onTap: () => cupertinoRouter(context, const DetailScreen()),
+          child: Container(
+            margin: EdgeInsets.symmetric(vertical: context.height / 200),
+            decoration: BoxDecoration(
+                color: AppColors.kWhiteColor,
+                borderRadius: BorderRadius.circular(10)),
+            child: ListTile(
+              leading: CircleAvatar(
+                  backgroundColor: AppColors.kPrimaryColor,
+                  // backgroundColor:
+                  //     Colors.primaries[Random().nextInt(Colors.primaries.length)],
+                  child: Text(
+                    list.name[0].toUpperCase(),
+                    style: appTextStyle(
+                        color: AppColors.kWhiteColor,
+                        fontWeight: FontWeight.bold),
+                  )),
+              title: Text(
+                list.name,
+                style: appTextStyle(
+                    fontWeight: FontWeight.bold, color: AppColors.kBlackColor),
+              ),
+              trailing: Text(formattedDateTime),
             ),
-            trailing: Text(formattedDateTime),
           ),
         );
       },
