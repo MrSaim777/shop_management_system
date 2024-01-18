@@ -238,12 +238,12 @@ class ProductsList extends StatelessWidget {
                 style: appTextStyle(
                     fontWeight: FontWeight.bold, color: AppColors.kBlackColor),
               ),
-              subtitle: list.desc == null
-                  ? null
-                  : Text(
-                      list.desc!,
-                      style: appTextStyle(),
-                    ),
+              // subtitle: list.desc == null
+              //     ? null
+              //     : Text(
+              //         list.desc!,
+              //         style: appTextStyle(),
+              //       ),
               trailing: Text(formattedDateTime),
             ),
           ),

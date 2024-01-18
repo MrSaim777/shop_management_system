@@ -58,12 +58,6 @@ class _BottomNavigationState extends State<BottomNavigation> {
     ];
   }
 
-  List<String> dropDownItems = [
-    ConstantStrings.selectType,
-    ConstantStrings.product,
-    ConstantStrings.asset
-  ];
-
   BottomNavigationBarItem bottomNavBarItem(
       {required IconData fontAwesomeIcon, required String lable}) {
     return BottomNavigationBarItem(
@@ -270,8 +264,8 @@ class _BottomNavigationState extends State<BottomNavigation> {
                           expandedShadow: boxShadow,
                         ),
                         hintText: ConstantStrings.selectCategory,
-                        items: dropDownItems,
-                        initialItem: dropDownItems[0],
+                        items:  provider.dropDownItems,
+                        initialItem: provider.dropDownItems[0],
                         onChanged: (value) {
                           provider.selectedType = value;
                         },

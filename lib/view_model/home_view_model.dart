@@ -54,6 +54,11 @@ class HomeViewModel extends ChangeNotifier {
     ConstantStrings.pounds,
     ConstantStrings.ounces,
   ];
+  List<String> dropDownItems = [
+    ConstantStrings.selectType,
+    ConstantStrings.product,
+    ConstantStrings.asset
+  ];
 
   addToList(BuildContext context) {
     if (_nameController.text.isNotEmpty &&
