@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 import 'package:shop_management/utils/constants/colors_const.dart';
 import 'package:shop_management/utils/constants/constant_strings.dart';
 import 'package:shop_management/utils/constants/global.dart';
+import 'package:shop_management/utils/extentions/build_context_extention.dart';
 import 'package:shop_management/view/screens/inventory_screen.dart';
 import 'package:shop_management/view/screens/main_screen.dart';
 import 'package:shop_management/view/screens/report_screen.dart';
@@ -187,19 +188,47 @@ class _BottomNavigationState extends State<BottomNavigation> {
                         textEditingController: provider.descController,
                         hintText: ConstantStrings.descriptionOptional),
                     SizedBox(height: deviceHeight / 50),
-                    AppCupertinoTextField(
-                      textEditingController: provider.priceController,
-                      hintText: ConstantStrings.price,
-                      textInputType: TextInputType.number,
-                      prefixWidget: Padding(
-                        padding: EdgeInsets.only(left: deviceWidth / 20),
-                        child: Text(
-                          ConstantStrings.currency,
-                          style: appTextStyle(
-                              color: AppColors.kBlackColor,
-                              fontWeight: FontWeight.bold),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: AppCupertinoTextField(
+                            edgeInsets:
+                                EdgeInsets.only(left: context.width / 20),
+                            textEditingController:
+                                provider.purchasePriceController,
+                            hintText: ConstantStrings.purchasePrice,
+                            textInputType: TextInputType.number,
+                            prefixWidget: Padding(
+                              padding: EdgeInsets.only(left: deviceWidth / 20),
+                              child: Text(
+                                ConstantStrings.currency,
+                                style: appTextStyle(
+                                    color: AppColors.kBlackColor,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                            ),
+                          ),
                         ),
-                      ),
+                        SizedBox(width: context.width / 30),
+                        Expanded(
+                          child: AppCupertinoTextField(
+                            edgeInsets:
+                                EdgeInsets.only(right: context.width / 20),
+                            textEditingController: provider.salePriceController,
+                            hintText: ConstantStrings.salePrice,
+                            textInputType: TextInputType.number,
+                            prefixWidget: Padding(
+                              padding: EdgeInsets.only(left: deviceWidth / 20),
+                              child: Text(
+                                ConstantStrings.currency,
+                                style: appTextStyle(
+                                    color: AppColors.kBlackColor,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                     SizedBox(height: deviceHeight / 50),
                     Row(
@@ -211,24 +240,21 @@ class _BottomNavigationState extends State<BottomNavigation> {
                             hintText: ConstantStrings.quantity,
                           ),
                         ),
-                        Expanded(
-                          child: Container(
-                            margin: EdgeInsets.only(right: deviceWidth / 30),
-                            decoration: BoxDecoration(
-                                color: AppColors.kWhiteColor,
-                                // boxShadow: boxShadow,
-                                borderRadius: BorderRadius.circular(10)),
-                            child: CustomDropdown<String>(
-                              decoration: CustomDropdownDecoration(
-                                expandedShadow: boxShadow,
-                              ),
-                              hintText: ConstantStrings.selectWeightUnit,
-                              items: provider.weightUnits,
-                              initialItem: provider.weightUnits[0],
-                              onChanged: (value) {
-                                provider.selectedWeight = value;
-                              },
+                        Container(
+                          width: context.width / 2.3,
+                          margin: EdgeInsets.only(right: deviceWidth / 30),
+                          decoration: BoxDecoration(
+                              color: AppColors.kWhiteColor,
+                              // boxShadow: boxShadow,
+                              borderRadius: BorderRadius.circular(10)),
+                          child: CustomDropdown<String>(
+                            decoration: CustomDropdownDecoration(
+                              expandedShadow: boxShadow,
                             ),
+                            hintText: ConstantStrings.selectWeightUnit,
+                            items: provider.weightUnits,
+                            initialItem: provider.weightUnits[0],
+                            onChanged: (value) => provider.selectWeight(value),
                           ),
                         )
                       ],
@@ -250,27 +276,25 @@ class _BottomNavigationState extends State<BottomNavigation> {
                         ),
                       ),
                     ),
-                    SizedBox(height: deviceHeight / 50),
-                    Container(
-                      margin: EdgeInsets.symmetric(
-                        horizontal: deviceWidth / 20,
-                      ),
-                      decoration: BoxDecoration(
-                          color: AppColors.kWhiteColor,
-                          // boxShadow: boxShadow,
-                          borderRadius: BorderRadius.circular(10)),
-                      child: CustomDropdown<String>(
-                        decoration: CustomDropdownDecoration(
-                          expandedShadow: boxShadow,
-                        ),
-                        hintText: ConstantStrings.selectCategory,
-                        items:  provider.dropDownItems,
-                        initialItem: provider.dropDownItems[0],
-                        onChanged: (value) {
-                          provider.selectedType = value;
-                        },
-                      ),
-                    ),
+                    // SizedBox(height: deviceHeight / 50),
+                    // Container(
+                    //   margin: EdgeInsets.symmetric(
+                    //     horizontal: deviceWidth / 20,
+                    //   ),
+                    //   decoration: BoxDecoration(
+                    //       color: AppColors.kWhiteColor,
+                    //       // boxShadow: boxShadow,
+                    //       borderRadius: BorderRadius.circular(10)),
+                    //   child: CustomDropdown<String>(
+                    //     decoration: CustomDropdownDecoration(
+                    //       expandedShadow: boxShadow,
+                    //     ),
+                    //     hintText: ConstantStrings.selectCategory,
+                    //     items: provider.dropDownItems,
+                    //     initialItem: provider.dropDownItems[0],
+                    //     onChanged: (value) => provider.selectType(value),
+                    //   ),
+                    // ),
                     SizedBox(height: deviceHeight / 50),
                     AppButton(
                         onTap: () => provider.addToList(context),

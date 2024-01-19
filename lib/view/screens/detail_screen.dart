@@ -19,6 +19,8 @@ class DetailScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final provider = Provider.of<HomeViewModel>(context);
+    final formattedDateTime =
+        DateFormat("dd-MM-yyyy hh:mm a").format(product.addedAt);
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: Stack(
@@ -26,29 +28,57 @@ class DetailScreen extends StatelessWidget {
           Column(
             children: [
               SizedBox(height: context.height / 50),
+              Text(
+                formattedDateTime,
+                style: appTextStyle(fontSize: 0.02),
+              ),
               AppCupertinoTextField(
                   textEditingController: TextEditingController(),
                   hintText: product.name),
               SizedBox(height: context.height / 50),
               AppCupertinoTextField(
                   textEditingController: TextEditingController(),
-                  hintText: product.desc == null
+                  hintText: product.description.isEmpty
                       ? ConstantStrings.descriptionOptional
-                      : product.desc!),
+                      : product.description),
               SizedBox(height: context.height / 50),
-              AppCupertinoTextField(
-                textEditingController: TextEditingController(),
-                hintText: product.price.toString(),
-                textInputType: TextInputType.number,
-                prefixWidget: Padding(
-                  padding: EdgeInsets.only(left: context.width / 20),
-                  child: Text(
-                    ConstantStrings.currency,
-                    style: appTextStyle(
-                        color: AppColors.kBlackColor,
-                        fontWeight: FontWeight.bold),
+              Row(
+                children: [
+                  Expanded(
+                    child: AppCupertinoTextField(
+                      edgeInsets: EdgeInsets.only(left: context.width / 20),
+                      textEditingController: provider.purchasePriceController,
+                      hintText: ConstantStrings.purchasePrice,
+                      textInputType: TextInputType.number,
+                      prefixWidget: Padding(
+                        padding: EdgeInsets.only(left: deviceWidth / 20),
+                        child: Text(
+                          ConstantStrings.currency,
+                          style: appTextStyle(
+                              color: AppColors.kBlackColor,
+                              fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                    ),
                   ),
-                ),
+                  Expanded(
+                    child: AppCupertinoTextField(
+                      edgeInsets: EdgeInsets.only(right: context.width / 20),
+                      textEditingController: provider.salePriceController,
+                      hintText: ConstantStrings.salePrice,
+                      textInputType: TextInputType.number,
+                      prefixWidget: Padding(
+                        padding: EdgeInsets.only(left: deviceWidth / 20),
+                        child: Text(
+                          ConstantStrings.currency,
+                          style: appTextStyle(
+                              color: AppColors.kBlackColor,
+                              fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
               ),
               SizedBox(height: context.height / 50),
               Row(
@@ -74,9 +104,7 @@ class DetailScreen extends StatelessWidget {
                         hintText: product.weightUnit,
                         items: provider.weightUnits,
                         initialItem: provider.weightUnits[0],
-                        onChanged: (value) {
-                          provider.selectedWeight = value;
-                        },
+                        onChanged: (value) => provider.selectWeight(value),
                       ),
                     ),
                   )

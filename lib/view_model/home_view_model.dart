@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:shop_management/model/asset_model.dart';
 import 'package:shop_management/model/product_model.dart';
@@ -29,8 +28,12 @@ class HomeViewModel extends ChangeNotifier {
   final TextEditingController _descController = TextEditingController();
   TextEditingController get descController => _descController;
 
-  final TextEditingController _priceController = TextEditingController();
-  TextEditingController get priceController => _priceController;
+  final TextEditingController _purchasePriceController =
+      TextEditingController();
+  TextEditingController get purchasePriceController => _purchasePriceController;
+
+  final TextEditingController _salePriceController = TextEditingController();
+  TextEditingController get salePriceController => _salePriceController;
 
   final TextEditingController _quantityController = TextEditingController();
   TextEditingController get quantityController => _quantityController;
@@ -41,10 +44,11 @@ class HomeViewModel extends ChangeNotifier {
   DateTime _expiryDate = DateTime(0);
   DateTime get expirtDate => _expiryDate;
 
-  List<Product> productsList = [];
+  List<Product> inStockProductsList = [];
+  List<Product> outOfStockProductsList = [];
   List<Asset> assetsList = [];
   String selectedType = "";
-  String selectedWeight = "";
+  String selectedWeightUnit = "";
   List<String> weightUnits = [
     ConstantStrings.selectWeightUnit,
     ConstantStrings.kilograms,
@@ -60,49 +64,85 @@ class HomeViewModel extends ChangeNotifier {
     ConstantStrings.asset
   ];
 
+  selectWeight(String value) {
+    selectedWeightUnit = value;
+  }
+
+  selectType(String value) {
+    selectedType = value;
+  }
+
+  void increaseQuantity(Product product, double amount) {
+    product.increaseQuantity(amount);
+    notifyListeners();
+  }
+
+  void decreaseQuantity(Product product, double amount) {
+    product.decreaseQuantity(amount);
+    if (product.quantity == 0) {
+      final p = Product(
+          id: product.id,
+          name: product.name,
+          description: product.description,
+          purchasePrice: product.purchasePrice,
+          salePrice: product.salePrice,
+          quantity: product.quantity,
+          weightUnit: product.weightUnit,
+          addedAt: product.addedAt,
+          expiryDate: product.expiryDate);
+      outOfStockProductsList.add(p);
+      inStockProductsList.removeWhere((e) => e.id == product.id);
+    }
+    notifyListeners();
+  }
+
   addToList(BuildContext context) {
     if (_nameController.text.isNotEmpty &&
-        _priceController.text.isNotEmpty &&
+        _purchasePriceController.text.isNotEmpty &&
+        _salePriceController.text.isNotEmpty &&
         _quantityController.text.isNotEmpty &&
         _expiryDateController.text.isNotEmpty) {
-      if (selectedWeight.isEmpty) {
+      final id = DateTime.now().millisecondsSinceEpoch;
+      if (selectedWeightUnit.isEmpty) {
         showFlushBar(
             context: context, message: ConstantStrings.selectWeightUnit);
       } else {
-        if (selectedType == ConstantStrings.product) {
-          log("${_priceController.text} ${_nameController.text} ${_quantityController.text} ${_expiryDateController.text}",
-              name: "Values");
-          Navigator.pop(context);
-          productsList.add(Product(
-              name: _nameController.text,
-              desc: _descController.text,
-              dateTime: DateTime.now(),
-              price: int.parse(_priceController.text.trim()),
-              quantity: double.parse(_quantityController.text.trim()),
-              weightUnit: selectedWeight,
-              expiryDate: _expiryDate));
-          showFlushBar(
-              context: context,
-              message: ConstantStrings.productAdded,
-              seconds: 2);
-          clearValues();
-          notifyListeners();
-        } else if (selectedType == ConstantStrings.asset) {
-          // Navigator.pop(context);
-          // clearValues();
-          // assetsList
-          //     .add(Asset(name: _nameController.text, dateTime: DateTime.now()));
-          // selectedType = "";
-          // showFlushBar(
-          //     context: context, message: ConstantStrings.assetAdded, seconds: 2);
-          // notifyListeners();
-        } else {
-          showFlushBar(context: context, message: ConstantStrings.selectType);
-        }
+        // if (selectedType == ConstantStrings.product) {
+        // log("${_priceController.text} ${_nameController.text} ${_quantityController.text} ${_expiryDateController.text}",
+        //     name: "Values");
+        Navigator.pop(context);
+        inStockProductsList.add(Product(
+            id: id,
+            name: _nameController.text,
+            description: _descController.text,
+            purchasePrice: int.parse(_purchasePriceController.text),
+            salePrice: int.parse(_salePriceController.text),
+            quantity: double.parse(_quantityController.text),
+            weightUnit: selectedWeightUnit,
+            addedAt: DateTime.now(),
+            expiryDate: _expiryDate));
+        showFlushBar(
+            context: context,
+            message: ConstantStrings.productAdded,
+            seconds: 2);
+        clearValues();
+        notifyListeners();
+        // } else if (selectedType == ConstantStrings.asset) {
+        //   // Navigator.pop(context);
+        //   // clearValues();
+        //   // assetsList
+        //   //     .add(Asset(name: _nameController.text, dateTime: DateTime.now()));
+        //   // selectedType = "";
+        //   // showFlushBar(
+        //   //     context: context, message: ConstantStrings.assetAdded, seconds: 2);
+        //   // notifyListeners();
+        // } else {
+        //   showFlushBar(context: context, message: ConstantStrings.selectType);
+        // }
       }
     } else {
-      // showFlushBar(context: context, message: ConstantStrings.writeName);
-      showFlushBar(context: context, message: "All fields required");
+      showFlushBar(
+          context: context, message: ConstantStrings.allFieldsRequired);
     }
   }
 
@@ -139,12 +179,13 @@ class HomeViewModel extends ChangeNotifier {
 
   clearValues() {
     selectedType = "";
-    selectedWeight = "";
+    selectedWeightUnit = "";
     _expiryDate = DateTime(0);
     _nameController.clear();
     _descController.clear();
     _quantityController.clear();
-    _priceController.clear();
     _expiryDateController.clear();
+    _purchasePriceController.clear();
+    _salePriceController.clear();
   }
 }

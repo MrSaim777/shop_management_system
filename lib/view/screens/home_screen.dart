@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:shop_management/utils/constants/colors_const.dart';
 import 'package:shop_management/utils/constants/constant_strings.dart';
 import 'package:shop_management/utils/constants/global.dart';
 import 'package:shop_management/utils/extentions/build_context_extention.dart';
-import 'package:shop_management/utils/routes/cupertino_router.dart';
-import 'package:shop_management/view/screens/detail_screen.dart';
+import 'package:shop_management/view/widgets/in_stock_prods.dart';
 import 'package:shop_management/view/widgets/increasing_text.dart';
+import 'package:shop_management/view/widgets/out_of_stock_prods.dart';
 import 'package:shop_management/view/widgets/product_expense.dart';
 import 'package:shop_management/view_model/home_view_model.dart';
 
@@ -144,7 +143,7 @@ class HomeScreen extends StatelessWidget {
                                             ConstantStrings.products),
                                     child: Center(
                                       child: Text(
-                                        ConstantStrings.products,
+                                        ConstantStrings.inStock,
                                         style: appTextStyle(
                                             fontSize: 0.03,
                                             fontWeight: FontWeight.w900,
@@ -160,7 +159,7 @@ class HomeScreen extends StatelessWidget {
                                             ConstantStrings.assets),
                                     child: Center(
                                       child: Text(
-                                        ConstantStrings.assets,
+                                        ConstantStrings.outOfStock,
                                         style: appTextStyle(
                                             fontSize: 0.03,
                                             fontWeight: FontWeight.w900,
@@ -176,20 +175,22 @@ class HomeScreen extends StatelessWidget {
                       ),
                       SizedBox(height: deviceHeight / 50),
                       homeModelView.productAssetsIndex == 0
-                          ? homeModelView.productsList.isEmpty
+                          ? homeModelView.inStockProductsList.isEmpty
                               ? SizedBox(
                                   height: context.height / 2,
                                   child: const Center(
                                       child: Text(ConstantStrings.noProducts)),
                                 )
-                              : ProductsList(homeModelView: homeModelView)
-                          : homeModelView.assetsList.isEmpty
+                              : InStockProductsList(
+                                  homeModelView: homeModelView)
+                          : homeModelView.outOfStockProductsList.isEmpty
                               ? SizedBox(
                                   height: context.height / 2,
                                   child: const Center(
-                                      child: Text(ConstantStrings.noAssets)),
+                                      child: Text(ConstantStrings.noProducts)),
                                 )
-                              : AssetsList(homeModelView: homeModelView)
+                              : OutOfStockProductsList(
+                                  homeModelView: homeModelView)
                     ],
                   );
                 },
@@ -198,105 +199,6 @@ class HomeScreen extends StatelessWidget {
           ),
         ),
       ),
-    );
-  }
-}
-
-class ProductsList extends StatelessWidget {
-  const ProductsList({super.key, required this.homeModelView});
-  final HomeViewModel homeModelView;
-
-  @override
-  Widget build(BuildContext context) {
-    return ListView.builder(
-      physics: const NeverScrollableScrollPhysics(),
-      shrinkWrap: true,
-      itemCount: homeModelView.productsList.length,
-      itemBuilder: (context, index) {
-        final list = homeModelView.productsList[index];
-        final formattedDateTime =
-            DateFormat("dd-MM-yyyy hh:mm a").format(list.dateTime);
-
-        return GestureDetector(
-          onTap: () => cupertinoRouter(context, DetailScreen(product: list)),
-          child: Container(
-            margin: EdgeInsets.symmetric(vertical: context.height / 200),
-            decoration: BoxDecoration(
-                color: AppColors.kWhiteColor,
-                borderRadius: BorderRadius.circular(10)),
-            child: ListTile(
-              leading: CircleAvatar(
-                  backgroundColor: AppColors.kPrimaryColor,
-                  child: Text(
-                    list.name[0].toUpperCase(),
-                    style: appTextStyle(
-                        color: AppColors.kWhiteColor,
-                        fontWeight: FontWeight.bold),
-                  )),
-              title: Text(
-                list.name,
-                style: appTextStyle(
-                    fontWeight: FontWeight.bold, color: AppColors.kBlackColor),
-              ),
-              // subtitle: list.desc == null
-              //     ? null
-              //     : Text(
-              //         list.desc!,
-              //         style: appTextStyle(),
-              //       ),
-              trailing: Text(formattedDateTime),
-            ),
-          ),
-        );
-      },
-    );
-  }
-}
-
-class AssetsList extends StatelessWidget {
-  final HomeViewModel homeModelView;
-
-  const AssetsList({super.key, required this.homeModelView});
-
-  @override
-  Widget build(BuildContext context) {
-    return ListView.builder(
-      physics: const NeverScrollableScrollPhysics(),
-      shrinkWrap: true,
-      itemCount: homeModelView.assetsList.length,
-      itemBuilder: (context, index) {
-        final list = homeModelView.assetsList[index];
-        final formattedDateTime =
-            DateFormat("dd-MM-yyyy hh:mm a").format(list.dateTime);
-
-        return GestureDetector(
-          // onTap: () => cupertinoRouter(context, const DetailScreen()),
-          child: Container(
-            margin: EdgeInsets.symmetric(vertical: context.height / 200),
-            decoration: BoxDecoration(
-                color: AppColors.kWhiteColor,
-                borderRadius: BorderRadius.circular(10)),
-            child: ListTile(
-              leading: CircleAvatar(
-                  backgroundColor: AppColors.kPrimaryColor,
-                  // backgroundColor:
-                  //     Colors.primaries[Random().nextInt(Colors.primaries.length)],
-                  child: Text(
-                    list.name[0].toUpperCase(),
-                    style: appTextStyle(
-                        color: AppColors.kWhiteColor,
-                        fontWeight: FontWeight.bold),
-                  )),
-              title: Text(
-                list.name,
-                style: appTextStyle(
-                    fontWeight: FontWeight.bold, color: AppColors.kBlackColor),
-              ),
-              trailing: Text(formattedDateTime),
-            ),
-          ),
-        );
-      },
     );
   }
 }
