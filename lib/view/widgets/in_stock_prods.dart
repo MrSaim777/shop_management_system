@@ -66,7 +66,8 @@ class InStockProductsList extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       InkWell(
-                        onTap: () => homeModelView.increaseQuantity(list, 1),
+                        onTap: () =>
+                            homeModelView.increaseSoldQuantity(list, 1),
                         child: Container(
                           width: context.width / 10,
                           decoration: const BoxDecoration(
@@ -88,7 +89,8 @@ class InStockProductsList extends StatelessWidget {
                         child: Text(list.soldQuantity.toString()),
                       ),
                       InkWell(
-                        onTap: () => homeModelView.decreaseQuantity(list, 1),
+                        onTap: () =>
+                            homeModelView.decreaseSoldQuantity(list, 1),
                         child: Container(
                           width: context.width / 10,
                           decoration: const BoxDecoration(

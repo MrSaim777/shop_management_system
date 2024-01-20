@@ -11,8 +11,27 @@ import 'package:shop_management/view/widgets/out_of_stock_prods.dart';
 import 'package:shop_management/view/widgets/product_expense.dart';
 import 'package:shop_management/view_model/home_view_model.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  late PageController pageController;
+
+  @override
+  void initState() {
+    super.initState();
+    pageController = PageController();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    pageController.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -138,9 +157,8 @@ class HomeScreen extends StatelessWidget {
                               children: [
                                 Expanded(
                                   child: GestureDetector(
-                                    onTap: () =>
-                                        homeModelView.selectProductAssetIndex(
-                                            ConstantStrings.products),
+                                    onTap: () => homeModelView
+                                        .selectProductAssetIndex(0),
                                     child: Center(
                                       child: Text(
                                         ConstantStrings.inStock,
@@ -154,9 +172,8 @@ class HomeScreen extends StatelessWidget {
                                 ),
                                 Expanded(
                                   child: GestureDetector(
-                                    onTap: () =>
-                                        homeModelView.selectProductAssetIndex(
-                                            ConstantStrings.assets),
+                                    onTap: () => homeModelView
+                                        .selectProductAssetIndex(1),
                                     child: Center(
                                       child: Text(
                                         ConstantStrings.outOfStock,

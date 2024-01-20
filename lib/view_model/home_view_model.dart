@@ -72,13 +72,13 @@ class HomeViewModel extends ChangeNotifier {
     selectedType = value;
   }
 
-  void increaseQuantity(Product product, double amount) {
-    product.increaseQuantity(amount);
+  void increaseSoldQuantity(Product product, double amount) {
+    product.increaseSoldQuantity(amount);
     notifyListeners();
   }
 
-  void decreaseQuantity(Product product, double amount) {
-    product.decreaseQuantity(amount);
+  void decreaseSoldQuantity(Product product, double amount) {
+    product.decreaseSoldQuantity(amount);
     if (product.quantity == 0) {
       final p = Product(
           id: product.id,
@@ -161,8 +161,10 @@ class HomeViewModel extends ChangeNotifier {
     }
   }
 
-  selectProductAssetIndex(String value) {
-    if (value == ConstantStrings.products) {
+  // selectProductAssetIndex(String value) {
+  // if (value == ConstantStrings.products) {
+  selectProductAssetIndex(int i) {
+    if (i == 0) {
       _productAssetsIndex = 0;
       notifyListeners();
     } else {
