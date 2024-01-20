@@ -7,7 +7,7 @@ import 'package:shop_management/utils/constants/colors_const.dart';
 import 'package:shop_management/utils/constants/constant_strings.dart';
 import 'package:shop_management/utils/constants/global.dart';
 import 'package:shop_management/utils/extentions/build_context_extention.dart';
-import 'package:shop_management/view/screens/inventory_screen.dart';
+import 'package:shop_management/view/screens/customers_screen.dart';
 import 'package:shop_management/view/screens/main_screen.dart';
 import 'package:shop_management/view/screens/report_screen.dart';
 import 'package:shop_management/view/screens/sales_screen.dart';
@@ -55,7 +55,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
       const SalesScreen(),
       const SizedBox(),
       const ReportScreen(),
-      const InventoryScreen()
+      const CustomersScreen()
     ];
   }
 
@@ -87,12 +87,12 @@ class _BottomNavigationState extends State<BottomNavigation> {
         backgroundColor: AppColors.kWhiteColor,
       ),
       bottomNavBarItem(
-        fontAwesomeIcon: FontAwesomeIcons.bars,
+        fontAwesomeIcon: FontAwesomeIcons.database,
         lable: ConstantStrings.report,
       ),
       bottomNavBarItem(
-        fontAwesomeIcon: FontAwesomeIcons.cartFlatbed,
-        lable: ConstantStrings.inventory,
+        fontAwesomeIcon: FontAwesomeIcons.users,
+        lable: ConstantStrings.customers,
       ),
     ];
     return Scaffold(

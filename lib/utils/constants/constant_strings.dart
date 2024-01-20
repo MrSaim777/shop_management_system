@@ -38,7 +38,7 @@ class ConstantStrings {
   static const String allFieldsRequired = "All fields required";
   static const String inStock = "In Stock";
   static const String outOfStock = "Out Of Stock";
-  // static const String  = "";
+  static const String customers = "Customers";
   // static const String  = "";
   // static const String  = "";
   // static const String  = "";

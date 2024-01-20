@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
@@ -52,7 +53,8 @@ class _HomeScreenState extends State<HomeScreen> {
                         fontWeight: FontWeight.w900,
                         fontSize: 0.04),
                   ),
-                  const FaIcon(FontAwesomeIcons.bars)
+                  Icon(CupertinoIcons.bell_circle,
+                      size: context.width / 10, color: AppColors.kGreyColor)
                   // AppDrawerButton(zoomDrawerController: zoomDrawerController)
                 ],
               ),
