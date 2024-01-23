@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
-import 'package:shop_management/view/screens/customers_screen.dart';
-import 'package:shop_management/view/screens/main_screen.dart';
-import 'package:shop_management/view/screens/report_screen.dart';
-import 'package:shop_management/view/screens/sales_screen.dart';
+import 'package:shop_management/view/screens/customers/customers_screen.dart';
+import 'package:shop_management/view/screens/home/main_screen.dart';
+import 'package:shop_management/view/screens/report/report_screen.dart';
+import 'package:shop_management/view/screens/sales/sales_screen.dart';
 
 class BottomNavViewModel extends ChangeNotifier {
   // late PageController _pageController;

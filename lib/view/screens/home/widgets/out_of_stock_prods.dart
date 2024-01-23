@@ -3,7 +3,7 @@ import 'package:shop_management/utils/constants/colors_const.dart';
 import 'package:shop_management/utils/constants/global.dart';
 import 'package:shop_management/utils/extentions/build_context_extention.dart';
 import 'package:shop_management/utils/routes/cupertino_router.dart';
-import 'package:shop_management/view/screens/detail_screen.dart';
+import 'package:shop_management/view/screens/home/detail_screen.dart';
 import 'package:shop_management/view_model/home_view_model.dart';
 
 class OutOfStockProductsList extends StatelessWidget {

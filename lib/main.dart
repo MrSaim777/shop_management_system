@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:shop_management/utils/constants/global.dart';
-import 'package:shop_management/view/screens/bottom_nav.dart';
 import 'package:shop_management/utils/constants/colors_const.dart';
+import 'package:shop_management/view/screens/auth/sign_in_screen.dart';
+import 'package:shop_management/view_model/auth_view_model.dart';
 import 'package:shop_management/view_model/bottom_nav_view_model.dart';
 import 'package:shop_management/view_model/home_view_model.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
@@ -27,6 +28,9 @@ class MyApp extends StatelessWidget {
           ),
           ChangeNotifierProvider(
             create: (context) => BottomNavViewModel(),
+          ),
+          ChangeNotifierProvider(
+            create: (context) => AuthViewModel(),
           )
         ],
         child: MaterialApp(
@@ -48,7 +52,8 @@ class MyApp extends StatelessWidget {
                 data: MediaQuery.of(context).copyWith(),
                 child: widget ?? const SizedBox());
           },
-          home: const BottomNavigation(),
+          // home: const BottomNavigation(),
+          home: const SignInScreen(),
         ),
       ),
     );

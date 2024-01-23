@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:shop_management/view/screens/home_screen.dart';
+import 'package:shop_management/view/screens/home/home_screen.dart';
 
 
 class MainScreen extends StatefulWidget {

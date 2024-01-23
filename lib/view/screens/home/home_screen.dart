@@ -6,10 +6,10 @@ import 'package:shop_management/utils/constants/colors_const.dart';
 import 'package:shop_management/utils/constants/constant_strings.dart';
 import 'package:shop_management/utils/constants/global.dart';
 import 'package:shop_management/utils/extentions/build_context_extention.dart';
-import 'package:shop_management/view/widgets/in_stock_prods.dart';
+import 'package:shop_management/view/screens/home/widgets/in_stock_prods.dart';
 import 'package:shop_management/view/widgets/increasing_text.dart';
-import 'package:shop_management/view/widgets/out_of_stock_prods.dart';
-import 'package:shop_management/view/widgets/product_expense.dart';
+import 'package:shop_management/view/screens/home/widgets/out_of_stock_prods.dart';
+import 'package:shop_management/view/screens/home/widgets/product_expense.dart';
 import 'package:shop_management/view_model/home_view_model.dart';
 
 class HomeScreen extends StatefulWidget {
