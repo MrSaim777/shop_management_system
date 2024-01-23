@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:shop_management/utils/constants/colors_const.dart';
 
 double deviceWidth = 0;
@@ -7,6 +8,14 @@ double deviceAverageSize = 0;
 double textSizeRegular = 0.027;
 double containerBorderBig = 20.0;
 double containerBorderCircularSmall = 50.0;
+
+const appName = 'Shop Management';
+final appTheme = ThemeData(
+  colorScheme: ColorScheme.fromSeed(seedColor: AppColors.kPrimaryColor),
+  scaffoldBackgroundColor: AppColors.kScaffoldColor,
+  useMaterial3: true,
+  fontFamily: GoogleFonts.montserrat().fontFamily,
+);
 
 TextStyle appTextStyle(
         {FontWeight? fontWeight, double? fontSize, Color? color}) =>

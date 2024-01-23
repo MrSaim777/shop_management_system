@@ -1,17 +1,20 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'package:shop_management/firebase_options.dart';
 import 'package:shop_management/utils/constants/global.dart';
-import 'package:shop_management/utils/constants/colors_const.dart';
 import 'package:shop_management/view/screens/auth/sign_in_screen.dart';
 import 'package:shop_management/view_model/auth_view_model.dart';
 import 'package:shop_management/view_model/bottom_nav_view_model.dart';
 import 'package:shop_management/view_model/home_view_model.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 
-void main() {
+Future<void> main() async {
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(const MyApp());
 }
 
@@ -36,14 +39,8 @@ class MyApp extends StatelessWidget {
         child: MaterialApp(
           debugShowCheckedModeBanner: false,
           // navigatorKey: navigatorKey,
-          title: 'Shop Management',
-          theme: ThemeData(
-            colorScheme:
-                ColorScheme.fromSeed(seedColor: AppColors.kPrimaryColor),
-            scaffoldBackgroundColor: AppColors.kScaffoldColor,
-            useMaterial3: true,
-            fontFamily: GoogleFonts.montserrat().fontFamily,
-          ),
+          title: appName,
+          theme: appTheme,
           builder: (context, widget) {
             deviceHeight = MediaQuery.sizeOf(context).height;
             deviceWidth = MediaQuery.sizeOf(context).width;

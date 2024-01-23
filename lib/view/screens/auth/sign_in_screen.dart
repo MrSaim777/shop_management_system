@@ -19,6 +19,7 @@ class SignInScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final provider = Provider.of<AuthViewModel>(context);
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [

@@ -20,4 +20,23 @@ class AuthViewModel extends ChangeNotifier {
       TextEditingController();
   TextEditingController get signUpPasswordController =>
       _signUpPasswordController;
+
+  clearSignInFields() {
+    _signInEmailController.clear();
+    _signInPasswordController.clear();
+  }
+
+  clearSignUpFields() {
+    _signUpEmailController.clear();
+    _signUpPasswordController.clear();
+  }
+
+  @override
+  void dispose() {
+    _signInEmailController.dispose();
+    _signInPasswordController.dispose();
+    _signUpEmailController.dispose();
+    _signUpPasswordController.dispose();
+    super.dispose();
+  }
 }
