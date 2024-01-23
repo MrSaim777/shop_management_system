@@ -10,6 +10,7 @@ import 'package:shop_management/view/screens/home/widgets/in_stock_prods.dart';
 import 'package:shop_management/view/widgets/increasing_text.dart';
 import 'package:shop_management/view/screens/home/widgets/out_of_stock_prods.dart';
 import 'package:shop_management/view/screens/home/widgets/product_expense.dart';
+import 'package:shop_management/view_model/auth_view_model.dart';
 import 'package:shop_management/view_model/home_view_model.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -36,12 +37,24 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final authProvider = Provider.of<AuthViewModel>(context);
     return Scaffold(
       body: SingleChildScrollView(
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: deviceWidth / 30),
           child: Column(
             children: [
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: AppColors.kPrimaryColor,
+                  elevation: 5,
+                ),
+                child: const Icon(
+                  Icons.logout,
+                  color: AppColors.kWhiteColor,
+                ),
+                onPressed: () => authProvider.logout(context),
+              ),
               SizedBox(height: context.height / 50),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,

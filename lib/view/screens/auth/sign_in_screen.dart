@@ -44,7 +44,7 @@ class SignInScreen extends StatelessWidget {
           ),
           SizedBox(height: context.height / 20),
           AppButton(
-              onTap: () => cupertinoRouter(context, const BottomNavigation()),
+              onTap: () => provider.signIn(context),
               btnText: ConstantStrings.signIn),
           TextButton(
               onPressed: () => cupertinoRouter(context, const SignUpScreen()),

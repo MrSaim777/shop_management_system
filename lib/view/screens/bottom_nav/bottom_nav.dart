@@ -1,4 +1,5 @@
 import 'package:animated_custom_dropdown/custom_dropdown.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
@@ -13,7 +14,8 @@ import 'package:shop_management/view_model/bottom_nav_view_model.dart';
 import 'package:shop_management/view_model/home_view_model.dart';
 
 class BottomNavigation extends StatelessWidget {
-  const BottomNavigation({super.key});
+  const BottomNavigation({super.key, required this.user});
+  final User user;
 
   @override
   Widget build(BuildContext context) {
@@ -60,18 +62,18 @@ class BottomNavigation extends StatelessWidget {
     return Scaffold(
         // floatingActionButton: Padding(
         //   padding: EdgeInsets.only(top: deviceWidth / 8),
-        //   child: ElevatedButton(
-        //     style: ElevatedButton.styleFrom(
-        //       backgroundColor: AppColors.kPrimaryColor,
-        //       elevation: 5,
-        //     ),
-        //     child: const Icon(
-        //       Icons.add,
-        //       color: AppColors.kWhiteColor,
-        //     ),
-        //     onPressed: () =>
-        //         floatingBtnBottomSheet(context, deviceHeight / 1.35),
-        //   ),
+          // child: ElevatedButton(
+          //   style: ElevatedButton.styleFrom(
+          //     backgroundColor: AppColors.kPrimaryColor,
+          //     elevation: 5,
+          //   ),
+          //   child: const Icon(
+          //     Icons.add,
+          //     color: AppColors.kWhiteColor,
+          //   ),
+          //   onPressed: () =>
+          //       Provider.of<AuthViewModel>(context).logout(context),
+          // ),
         // ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
         bottomNavigationBar: Container(

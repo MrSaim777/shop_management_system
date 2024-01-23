@@ -1,9 +1,11 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shop_management/firebase_options.dart';
 import 'package:shop_management/utils/constants/global.dart';
 import 'package:shop_management/view/screens/auth/sign_in_screen.dart';
+import 'package:shop_management/view/screens/bottom_nav/bottom_nav.dart';
 import 'package:shop_management/view_model/auth_view_model.dart';
 import 'package:shop_management/view_model/bottom_nav_view_model.dart';
 import 'package:shop_management/view_model/home_view_model.dart';
@@ -49,8 +51,9 @@ class MyApp extends StatelessWidget {
                 data: MediaQuery.of(context).copyWith(),
                 child: widget ?? const SizedBox());
           },
-          // home: const BottomNavigation(),
-          home: const SignInScreen(),
+          home: FirebaseAuth.instance.currentUser == null
+              ? const SignInScreen()
+              : BottomNavigation(user: FirebaseAuth.instance.currentUser!),
         ),
       ),
     );

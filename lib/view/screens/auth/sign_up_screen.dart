@@ -41,7 +41,9 @@ class SignUpScreen extends StatelessWidget {
                 ),
               ),
               SizedBox(height: context.height / 20),
-              AppButton(onTap: () {}, btnText: ConstantStrings.signUp),
+              AppButton(
+                  onTap: () => provider.signUp(context),
+                  btnText: ConstantStrings.signUp),
             ],
           ),
           Positioned(
