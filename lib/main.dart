@@ -4,13 +4,15 @@ import 'package:provider/provider.dart';
 import 'package:shop_management/utils/constants/global.dart';
 import 'package:shop_management/view/screens/bottom_nav.dart';
 import 'package:shop_management/utils/constants/colors_const.dart';
+import 'package:shop_management/view_model/bottom_nav_view_model.dart';
 import 'package:shop_management/view_model/home_view_model.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 
 void main() {
+  WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
+  FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
   runApp(const MyApp());
 }
-
-// GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -22,6 +24,9 @@ class MyApp extends StatelessWidget {
         providers: [
           ChangeNotifierProvider(
             create: (context) => HomeViewModel(),
+          ),
+          ChangeNotifierProvider(
+            create: (context) => BottomNavViewModel(),
           )
         ],
         child: MaterialApp(

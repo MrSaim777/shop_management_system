@@ -2,70 +2,18 @@ import 'package:animated_custom_dropdown/custom_dropdown.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
-// import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 import 'package:shop_management/utils/constants/colors_const.dart';
 import 'package:shop_management/utils/constants/constant_strings.dart';
 import 'package:shop_management/utils/constants/global.dart';
 import 'package:shop_management/utils/extentions/build_context_extention.dart';
-import 'package:shop_management/view/screens/customers_screen.dart';
-import 'package:shop_management/view/screens/main_screen.dart';
-import 'package:shop_management/view/screens/report_screen.dart';
-import 'package:shop_management/view/screens/sales_screen.dart';
 import 'package:shop_management/view/widgets/app_btn.dart';
 import 'package:shop_management/view/widgets/app_cupertino_textfield.dart';
 import 'package:shop_management/view/widgets/date_picker.dart';
+import 'package:shop_management/view_model/bottom_nav_view_model.dart';
 import 'package:shop_management/view_model/home_view_model.dart';
 
-class BottomNavigation extends StatefulWidget {
+class BottomNavigation extends StatelessWidget {
   const BottomNavigation({super.key});
-
-  @override
-  State<BottomNavigation> createState() => _BottomNavigationState();
-}
-
-class _BottomNavigationState extends State<BottomNavigation> {
-  int index = 0;
-  // late PageController pageController;
-
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   pageController = PageController();
-  // }
-
-  // @override
-  // void dispose() {
-  //   super.dispose();
-  //   pageController.dispose();
-  // }
-
-  setIndex(int i) {
-    if (i != 2) {
-      setState(() {
-        index = i;
-        // pageController.animateToPage(index,
-        //     duration: const Duration(milliseconds: 400), curve: Curves.easeOut);
-      });
-    }
-  }
-
-  List<Widget> _buildScreens() {
-    return [
-      const MainScreen(),
-      const SalesScreen(),
-      const SizedBox(),
-      const ReportScreen(),
-      const CustomersScreen()
-    ];
-  }
-
-  BottomNavigationBarItem bottomNavBarItem(
-      {required IconData fontAwesomeIcon, required String lable}) {
-    return BottomNavigationBarItem(
-      icon: FaIcon(fontAwesomeIcon),
-      label: lable,
-    );
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -78,10 +26,24 @@ class _BottomNavigationState extends State<BottomNavigation> {
         fontAwesomeIcon: FontAwesomeIcons.chartSimple,
         lable: ConstantStrings.sales,
       ),
-      const BottomNavigationBarItem(
-        icon: FaIcon(
-          FontAwesomeIcons.plus,
-          color: AppColors.kWhiteColor,
+      BottomNavigationBarItem(
+        icon: Padding(
+          padding: EdgeInsets.only(top: deviceWidth / 50),
+          child: SizedBox(
+            height: context.height / 25,
+            child: ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                  backgroundColor: AppColors.kPrimaryColor,
+                  elevation: 5,
+                  padding: EdgeInsets.zero),
+              child: const Icon(
+                Icons.add,
+                color: AppColors.kWhiteColor,
+              ),
+              onPressed: () =>
+                  floatingBtnBottomSheet(context, deviceHeight / 1.35),
+            ),
+          ),
         ),
         label: "",
         backgroundColor: AppColors.kWhiteColor,
@@ -96,47 +58,53 @@ class _BottomNavigationState extends State<BottomNavigation> {
       ),
     ];
     return Scaffold(
-      floatingActionButton: Padding(
-        padding: EdgeInsets.only(top: deviceWidth / 8),
-        child: ElevatedButton(
-          style: ElevatedButton.styleFrom(
-            backgroundColor: AppColors.kPrimaryColor,
-            elevation: 5,
+        // floatingActionButton: Padding(
+        //   padding: EdgeInsets.only(top: deviceWidth / 8),
+        //   child: ElevatedButton(
+        //     style: ElevatedButton.styleFrom(
+        //       backgroundColor: AppColors.kPrimaryColor,
+        //       elevation: 5,
+        //     ),
+        //     child: const Icon(
+        //       Icons.add,
+        //       color: AppColors.kWhiteColor,
+        //     ),
+        //     onPressed: () =>
+        //         floatingBtnBottomSheet(context, deviceHeight / 1.35),
+        //   ),
+        // ),
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+        bottomNavigationBar: Container(
+          // margin: EdgeInsets.symmetric(horizontal: deviceWidth / 30),
+          decoration: BoxDecoration(
+              // color: Colors.amber,
+              borderRadius: BorderRadius.circular(containerBorderBig)),
+          child: Consumer<BottomNavViewModel>(
+            builder: (context, provider, child) => BottomNavigationBar(
+              // selectedIconTheme: CupertinoIconThemeData(),
+              // iconSize: deviceWidth / 15,
+              type: BottomNavigationBarType.fixed,
+              items: items,
+              currentIndex: provider.currentIndex,
+              elevation: 1,
+              onTap: (i) => provider.setIndex(i),
+              selectedItemColor: AppColors.kPrimaryColor,
+              unselectedItemColor: AppColors.kGreyColor,
+              showUnselectedLabels: true,
+            ),
           ),
-          child: const Icon(
-            Icons.add,
-            color: AppColors.kWhiteColor,
-          ),
-          onPressed: () => floatingBtnBottomSheet(context, deviceHeight / 1.35),
         ),
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      bottomNavigationBar: Container(
-        // margin: EdgeInsets.symmetric(horizontal: deviceWidth / 30),
-        decoration: BoxDecoration(
-            // color: Colors.amber,
-            borderRadius: BorderRadius.circular(containerBorderBig)),
-        child: BottomNavigationBar(
-          // selectedIconTheme: CupertinoIconThemeData(),
-          // iconSize: deviceWidth / 15,
-          type: BottomNavigationBarType.fixed,
-          items: items,
-          currentIndex: index,
-          elevation: 1,
-          onTap: (i) => setIndex(i),
-          selectedItemColor: AppColors.kPrimaryColor,
-          unselectedItemColor: AppColors.kGreyColor,
-          showUnselectedLabels: true,
-        ),
-      ),
-      body: IndexedStack(index: index, children: _buildScreens()),
-      // body: PageView(
-      //   controller: pageController,
-      //   onPageChanged: (i) {
-      //     setIndex(i);
-      //   },
-      //   children: _buildScreens(),
-      // ),
+        body: Consumer<BottomNavViewModel>(
+            builder: (context, provider, child) => IndexedStack(
+                index: provider.currentIndex,
+                children: provider.buildScreens)));
+  }
+
+  BottomNavigationBarItem bottomNavBarItem(
+      {required IconData fontAwesomeIcon, required String lable}) {
+    return BottomNavigationBarItem(
+      icon: FaIcon(fontAwesomeIcon),
+      label: lable,
     );
   }
 

@@ -10,6 +10,7 @@ class CustomersScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         body: ListView.builder(
+      padding: EdgeInsets.symmetric(horizontal: context.width / 30),
       itemCount: 10,
       itemBuilder: (context, index) {
         return Container(
