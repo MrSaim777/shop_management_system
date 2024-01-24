@@ -62,18 +62,18 @@ class BottomNavigation extends StatelessWidget {
     return Scaffold(
         // floatingActionButton: Padding(
         //   padding: EdgeInsets.only(top: context.width / 8),
-          // child: ElevatedButton(
-          //   style: ElevatedButton.styleFrom(
-          //     backgroundColor: AppColors.kPrimaryColor,
-          //     elevation: 5,
-          //   ),
-          //   child: const Icon(
-          //     Icons.add,
-          //     color: AppColors.kWhiteColor,
-          //   ),
-          //   onPressed: () =>
-          //       Provider.of<AuthViewModel>(context).logout(context),
-          // ),
+        // child: ElevatedButton(
+        //   style: ElevatedButton.styleFrom(
+        //     backgroundColor: AppColors.kPrimaryColor,
+        //     elevation: 5,
+        //   ),
+        //   child: const Icon(
+        //     Icons.add,
+        //     color: AppColors.kWhiteColor,
+        //   ),
+        //   onPressed: () =>
+        //       Provider.of<AuthViewModel>(context).logout(context),
+        // ),
         // ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
         bottomNavigationBar: Container(
@@ -169,7 +169,8 @@ class BottomNavigation extends StatelessWidget {
                             hintText: ConstantStrings.purchasePrice,
                             textInputType: TextInputType.number,
                             prefixWidget: Padding(
-                              padding: EdgeInsets.only(left: context.width / 20),
+                              padding:
+                                  EdgeInsets.only(left: context.width / 20),
                               child: Text(
                                 ConstantStrings.currency,
                                 style: appTextStyle(
@@ -188,7 +189,8 @@ class BottomNavigation extends StatelessWidget {
                             hintText: ConstantStrings.salePrice,
                             textInputType: TextInputType.number,
                             prefixWidget: Padding(
-                              padding: EdgeInsets.only(left: context.width / 20),
+                              padding:
+                                  EdgeInsets.only(left: context.width / 20),
                               child: Text(
                                 ConstantStrings.currency,
                                 style: appTextStyle(

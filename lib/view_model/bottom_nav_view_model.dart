@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:shop_management/view/screens/customers/customers_screen.dart';
@@ -10,7 +11,7 @@ class BottomNavViewModel extends ChangeNotifier {
   int _index = 0;
   List<Widget> _buildScreens() {
     return [
-      const MainScreen(),
+      MainScreen(user: FirebaseAuth.instance.currentUser!),
       const SalesScreen(),
       const SizedBox.shrink(),
       const ReportScreen(),

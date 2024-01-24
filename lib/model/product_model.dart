@@ -1,3 +1,5 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'dart:convert';
 import 'dart:developer';
 
 class Product {
@@ -44,4 +46,39 @@ class Product {
       log("Invalid quantity decrease");
     }
   }
+
+  Map<String, dynamic> toMap() {
+    return <String, dynamic>{
+      'id': id,
+      'name': name,
+      'description': description,
+      'purchasePrice': purchasePrice,
+      'salePrice': salePrice,
+      'quantity': quantity,
+      'soldQuantity': soldQuantity,
+      'weightUnit': weightUnit,
+      'addedAt': addedAt.millisecondsSinceEpoch,
+      'expiryDate': expiryDate.millisecondsSinceEpoch,
+    };
+  }
+
+  factory Product.fromMap(Map<String, dynamic> map) {
+    return Product(
+      id: map['id'] as int,
+      name: map['name'] as String,
+      description: map['description'] as String,
+      purchasePrice: map['purchasePrice'] as int,
+      salePrice: map['salePrice'] as int,
+      quantity: map['quantity'] as double,
+      soldQuantity: map['soldQuantity'] as double,
+      weightUnit: map['weightUnit'] as String,
+      addedAt: DateTime.fromMillisecondsSinceEpoch(map['addedAt'] as int),
+      expiryDate: DateTime.fromMillisecondsSinceEpoch(map['expiryDate'] as int),
+    );
+  }
+
+  String toJson() => json.encode(toMap());
+
+  factory Product.fromJson(String source) =>
+      Product.fromMap(json.decode(source) as Map<String, dynamic>);
 }

@@ -1,10 +1,25 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:shop_management/model/asset_model.dart';
 import 'package:shop_management/model/product_model.dart';
+import 'package:shop_management/repository/product_repo.dart';
 import 'package:shop_management/utils/constants/constant_strings.dart';
 import 'package:shop_management/utils/flush_bar.dart';
 
 class HomeViewModel extends ChangeNotifier {
+  // FirebaseAuth firebaseAuth = FirebaseAuth.instance;
+  // FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
+  ProductRepo productRepo = ProductRepo(
+      firebaseAuth: FirebaseAuth.instance,
+      firebaseFirestore: FirebaseFirestore.instance);
+
+  final Stream<QuerySnapshot> productssStream = FirebaseFirestore.instance
+      .collection('users')
+      .doc(FirebaseAuth.instance.currentUser!.email)
+      .collection('products')
+      .snapshots();
+
   bool _isFloatingBtnPressed = false;
   bool get isFloatingBtnPressed => _isFloatingBtnPressed;
   bool _isSaveBtn = false;
@@ -107,11 +122,8 @@ class HomeViewModel extends ChangeNotifier {
         showFlushBar(
             context: context, message: ConstantStrings.selectWeightUnit);
       } else {
-        // if (selectedType == ConstantStrings.product) {
-        // log("${_priceController.text} ${_nameController.text} ${_quantityController.text} ${_expiryDateController.text}",
-        //     name: "Values");
         Navigator.pop(context);
-        inStockProductsList.add(Product(
+        productRepo.addProduct(Product(
             id: id,
             name: _nameController.text,
             description: _descController.text,
@@ -121,24 +133,9 @@ class HomeViewModel extends ChangeNotifier {
             weightUnit: selectedWeightUnit,
             addedAt: DateTime.now(),
             expiryDate: _expiryDate));
-        showFlushBar(
-            context: context,
-            message: ConstantStrings.productAdded,
-            seconds: 2);
+
         clearValues();
-        notifyListeners();
-        // } else if (selectedType == ConstantStrings.asset) {
-        //   // Navigator.pop(context);
-        //   // clearValues();
-        //   // assetsList
-        //   //     .add(Asset(name: _nameController.text, dateTime: DateTime.now()));
-        //   // selectedType = "";
-        //   // showFlushBar(
-        //   //     context: context, message: ConstantStrings.assetAdded, seconds: 2);
-        //   // notifyListeners();
-        // } else {
-        //   showFlushBar(context: context, message: ConstantStrings.selectType);
-        // }
+        // notifyListeners();
       }
     } else {
       showFlushBar(
@@ -161,8 +158,6 @@ class HomeViewModel extends ChangeNotifier {
     }
   }
 
-  // selectProductAssetIndex(String value) {
-  // if (value == ConstantStrings.products) {
   selectProductAssetIndex(int i) {
     if (i == 0) {
       _productAssetsIndex = 0;
@@ -172,12 +167,6 @@ class HomeViewModel extends ChangeNotifier {
       notifyListeners();
     }
   }
-
-  // void updatePosition(double delta) {
-  //   containerPosition += delta;
-  //   containerPosition = containerPosition.clamp(minValue, maxValue);
-  //   notifyListeners();
-  // }
 
   clearValues() {
     selectedType = "";

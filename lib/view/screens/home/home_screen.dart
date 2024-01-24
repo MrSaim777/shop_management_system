@@ -1,4 +1,4 @@
-import 'package:flutter/cupertino.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
@@ -14,7 +14,9 @@ import 'package:shop_management/view_model/auth_view_model.dart';
 import 'package:shop_management/view_model/home_view_model.dart';
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+  const HomeScreen({super.key, required this.user});
+
+  final User user;
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -44,17 +46,6 @@ class _HomeScreenState extends State<HomeScreen> {
           padding: EdgeInsets.symmetric(horizontal: context.width / 30),
           child: Column(
             children: [
-              ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: AppColors.kPrimaryColor,
-                  elevation: 5,
-                ),
-                child: const Icon(
-                  Icons.logout,
-                  color: AppColors.kWhiteColor,
-                ),
-                onPressed: () => authProvider.logout(context),
-              ),
               SizedBox(height: context.height / 50),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -66,15 +57,39 @@ class _HomeScreenState extends State<HomeScreen> {
                         fontWeight: FontWeight.w900,
                         fontSize: 0.04),
                   ),
-                  Icon(CupertinoIcons.bell_circle,
-                      size: context.width / 10, color: AppColors.kGreyColor)
+                  Row(
+                    children: [
+                      InkWell(
+                        onTap: () => authProvider.logout(context),
+                        child: Icon(Icons.logout,
+                            size: context.width / 12,
+                            color: AppColors.kExpensesColor),
+                      ),
+                      // Icon(CupertinoIcons.bell_circle,
+                      //     size: context.width / 10,
+                      //     color: AppColors.kGreyColor),
+                    ],
+                  ),
                   // AppDrawerButton(zoomDrawerController: zoomDrawerController)
                 ],
               ),
+              // Row(
+              //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              //   children: [
+              //     Text(
+              //       widget.user.displayName ?? widget.user.email!,
+              //       style: appTextStyle(
+              //           color: AppColors.kTextColor,
+              //           fontWeight: FontWeight.w900,
+              //           fontSize: 0.04),
+              //     ),
+              //   ],
+              // ),
               SizedBox(height: context.height / 50),
               Container(
                 padding: EdgeInsets.symmetric(
-                    horizontal: context.width / 15, vertical: context.height / 50),
+                    horizontal: context.width / 15,
+                    vertical: context.height / 50),
                 decoration: BoxDecoration(
                   color: AppColors.kWhiteColor,
                   borderRadius: BorderRadius.circular(containerBorderBig),
@@ -207,14 +222,15 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                       SizedBox(height: context.height / 50),
                       homeModelView.productAssetsIndex == 0
-                          ? homeModelView.inStockProductsList.isEmpty
-                              ? SizedBox(
-                                  height: context.height / 2,
-                                  child: const Center(
-                                      child: Text(ConstantStrings.noProducts)),
-                                )
-                              : InStockProductsList(
-                                  homeModelView: homeModelView)
+                          ?
+                          // homeModelView.inStockProductsList.isEmpty
+                          //     ? SizedBox(
+                          //         height: context.height / 2,
+                          //         child: const Center(
+                          //             child: Text(ConstantStrings.noProducts)),
+                          //       )
+                          //     :
+                          InStockProductsList(homeModelView: homeModelView)
                           : homeModelView.outOfStockProductsList.isEmpty
                               ? SizedBox(
                                   height: context.height / 2,
