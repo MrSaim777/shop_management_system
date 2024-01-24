@@ -3,6 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:shop_management/utils/constants/colors_const.dart';
 import 'package:shop_management/utils/constants/constant_strings.dart';
 import 'package:shop_management/utils/constants/global.dart';
+import 'package:shop_management/utils/extentions/build_context_extention.dart';
 import 'package:shop_management/view/widgets/increasing_text.dart';
 
 class IncomeExpenseWidget extends StatelessWidget {
@@ -31,16 +32,16 @@ class IncomeExpenseWidget extends StatelessWidget {
               decoration:
                   BoxDecoration(shape: BoxShape.circle, color: containerColor),
               child: Padding(
-                padding: EdgeInsets.all(deviceWidth / 30),
+                padding: EdgeInsets.all(context.width / 30),
                 child: FaIcon(
                   icon,
                   color: iconColor,
-                  size: deviceWidth / 20,
+                  size: context.width / 20,
                 ),
               ),
             ),
             SizedBox(
-              width: deviceWidth / 50,
+              width: context.width / 50,
             ),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,

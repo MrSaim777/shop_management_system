@@ -19,7 +19,7 @@ class BackBtn extends StatelessWidget {
                 horizontal: context.width / 25, vertical: context.height / 80),
             surfaceTintColor: AppColors.kWhiteColor,
             elevation: 5,
-            fixedSize: Size(deviceWidth / 4, deviceHeight / 20)),
+            fixedSize: Size(context.width / 4, context.height/ 20)),
         child: Row(
           children: [
             FaIcon(

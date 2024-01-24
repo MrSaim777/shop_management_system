@@ -30,7 +30,7 @@ class BottomNavigation extends StatelessWidget {
       ),
       BottomNavigationBarItem(
         icon: Padding(
-          padding: EdgeInsets.only(top: deviceWidth / 50),
+          padding: EdgeInsets.only(top: context.width / 50),
           child: SizedBox(
             height: context.height / 25,
             child: ElevatedButton(
@@ -43,7 +43,7 @@ class BottomNavigation extends StatelessWidget {
                 color: AppColors.kWhiteColor,
               ),
               onPressed: () =>
-                  floatingBtnBottomSheet(context, deviceHeight / 1.35),
+                  floatingBtnBottomSheet(context, context.height / 1.35),
             ),
           ),
         ),
@@ -61,7 +61,7 @@ class BottomNavigation extends StatelessWidget {
     ];
     return Scaffold(
         // floatingActionButton: Padding(
-        //   padding: EdgeInsets.only(top: deviceWidth / 8),
+        //   padding: EdgeInsets.only(top: context.width / 8),
           // child: ElevatedButton(
           //   style: ElevatedButton.styleFrom(
           //     backgroundColor: AppColors.kPrimaryColor,
@@ -77,14 +77,14 @@ class BottomNavigation extends StatelessWidget {
         // ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
         bottomNavigationBar: Container(
-          // margin: EdgeInsets.symmetric(horizontal: deviceWidth / 30),
+          // margin: EdgeInsets.symmetric(horizontal: context.width / 30),
           decoration: BoxDecoration(
               // color: Colors.amber,
               borderRadius: BorderRadius.circular(containerBorderBig)),
           child: Consumer<BottomNavViewModel>(
             builder: (context, provider, child) => BottomNavigationBar(
               // selectedIconTheme: CupertinoIconThemeData(),
-              // iconSize: deviceWidth / 15,
+              // iconSize: context.width / 15,
               type: BottomNavigationBarType.fixed,
               items: items,
               currentIndex: provider.currentIndex,
@@ -129,7 +129,7 @@ class BottomNavigation extends StatelessWidget {
               Align(
                 alignment: Alignment.topRight,
                 child: Padding(
-                  padding: EdgeInsets.all(deviceWidth / 50),
+                  padding: EdgeInsets.all(context.width / 50),
                   child: ElevatedButton(
                       onPressed: () => Navigator.pop(context),
                       style: ElevatedButton.styleFrom(
@@ -139,11 +139,11 @@ class BottomNavigation extends StatelessWidget {
                       child: FaIcon(
                         // ignore: deprecated_member_use
                         FontAwesomeIcons.close,
-                        size: deviceWidth / 20,
+                        size: context.width / 20,
                       )),
                 ),
               ),
-              SizedBox(height: deviceHeight / 80),
+              SizedBox(height: context.height / 80),
               Consumer<HomeViewModel>(
                 builder: (_, provider, child) => Column(
                   children: [
@@ -153,11 +153,11 @@ class BottomNavigation extends StatelessWidget {
                           provider.nameController.text = value;
                         },
                         hintText: ConstantStrings.enterName),
-                    SizedBox(height: deviceHeight / 50),
+                    SizedBox(height: context.height / 50),
                     AppCupertinoTextField(
                         textEditingController: provider.descController,
                         hintText: ConstantStrings.descriptionOptional),
-                    SizedBox(height: deviceHeight / 50),
+                    SizedBox(height: context.height / 50),
                     Row(
                       children: [
                         Expanded(
@@ -169,7 +169,7 @@ class BottomNavigation extends StatelessWidget {
                             hintText: ConstantStrings.purchasePrice,
                             textInputType: TextInputType.number,
                             prefixWidget: Padding(
-                              padding: EdgeInsets.only(left: deviceWidth / 20),
+                              padding: EdgeInsets.only(left: context.width / 20),
                               child: Text(
                                 ConstantStrings.currency,
                                 style: appTextStyle(
@@ -188,7 +188,7 @@ class BottomNavigation extends StatelessWidget {
                             hintText: ConstantStrings.salePrice,
                             textInputType: TextInputType.number,
                             prefixWidget: Padding(
-                              padding: EdgeInsets.only(left: deviceWidth / 20),
+                              padding: EdgeInsets.only(left: context.width / 20),
                               child: Text(
                                 ConstantStrings.currency,
                                 style: appTextStyle(
@@ -200,7 +200,7 @@ class BottomNavigation extends StatelessWidget {
                         ),
                       ],
                     ),
-                    SizedBox(height: deviceHeight / 50),
+                    SizedBox(height: context.height / 50),
                     Row(
                       children: [
                         Expanded(
@@ -212,7 +212,7 @@ class BottomNavigation extends StatelessWidget {
                         ),
                         Container(
                           width: context.width / 2.3,
-                          margin: EdgeInsets.only(right: deviceWidth / 30),
+                          margin: EdgeInsets.only(right: context.width / 30),
                           decoration: BoxDecoration(
                               color: AppColors.kWhiteColor,
                               // boxShadow: boxShadow,
@@ -229,7 +229,7 @@ class BottomNavigation extends StatelessWidget {
                         )
                       ],
                     ),
-                    SizedBox(height: deviceHeight / 50),
+                    SizedBox(height: context.height / 50),
                     AppCupertinoTextField(
                       textEditingController: provider.expiryDateController,
                       onTap: () => appDatePicker(context, provider.expirtDate,
@@ -237,7 +237,7 @@ class BottomNavigation extends StatelessWidget {
                       readOnly: true,
                       hintText: "DD/MM/YYYY",
                       prefixWidget: Padding(
-                        padding: EdgeInsets.only(left: deviceWidth / 20),
+                        padding: EdgeInsets.only(left: context.width / 20),
                         child: Text(
                           ConstantStrings.expiryDate,
                           style: appTextStyle(
@@ -246,10 +246,10 @@ class BottomNavigation extends StatelessWidget {
                         ),
                       ),
                     ),
-                    // SizedBox(height: deviceHeight / 50),
+                    // SizedBox(height: context.height / 50),
                     // Container(
                     //   margin: EdgeInsets.symmetric(
-                    //     horizontal: deviceWidth / 20,
+                    //     horizontal: context.width / 20,
                     //   ),
                     //   decoration: BoxDecoration(
                     //       color: AppColors.kWhiteColor,
@@ -265,7 +265,7 @@ class BottomNavigation extends StatelessWidget {
                     //     onChanged: (value) => provider.selectType(value),
                     //   ),
                     // ),
-                    SizedBox(height: deviceHeight / 50),
+                    SizedBox(height: context.height / 50),
                     AppButton(
                         onTap: () => provider.addToList(context),
                         btnText: ConstantStrings.add)

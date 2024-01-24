@@ -41,7 +41,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       body: SingleChildScrollView(
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: deviceWidth / 30),
+          padding: EdgeInsets.symmetric(horizontal: context.width / 30),
           child: Column(
             children: [
               ElevatedButton(
@@ -71,10 +71,10 @@ class _HomeScreenState extends State<HomeScreen> {
                   // AppDrawerButton(zoomDrawerController: zoomDrawerController)
                 ],
               ),
-              SizedBox(height: deviceHeight / 50),
+              SizedBox(height: context.height / 50),
               Container(
                 padding: EdgeInsets.symmetric(
-                    horizontal: deviceWidth / 15, vertical: deviceHeight / 50),
+                    horizontal: context.width / 15, vertical: context.height / 50),
                 decoration: BoxDecoration(
                   color: AppColors.kWhiteColor,
                   borderRadius: BorderRadius.circular(containerBorderBig),
@@ -93,7 +93,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 fontSize: 0.04,
                                 fontWeight: FontWeight.w900),
                           ),
-                          SizedBox(width: deviceWidth / 30),
+                          SizedBox(width: context.width / 30),
                           IncreasingText(
                             10540,
                             suffix: ConstantStrings.currency,
@@ -103,16 +103,16 @@ class _HomeScreenState extends State<HomeScreen> {
                                 fontSize: 0.04,
                                 fontWeight: FontWeight.w900),
                           ),
-                          SizedBox(width: deviceWidth / 30),
+                          SizedBox(width: context.width / 30),
                           FaIcon(
                             FontAwesomeIcons.chartLine,
                             color: AppColors.kIncomeColor,
-                            size: deviceWidth / 22,
+                            size: context.width / 22,
                           )
                         ],
                       ),
                     ),
-                    SizedBox(height: deviceHeight / 30),
+                    SizedBox(height: context.height / 30),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -135,7 +135,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   ],
                 ),
               ),
-              SizedBox(height: deviceHeight / 50),
+              SizedBox(height: context.height / 50),
               Consumer<HomeViewModel>(
                 builder: (context, homeModelView, child) {
                   return Column(
@@ -143,8 +143,8 @@ class _HomeScreenState extends State<HomeScreen> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Container(
-                        width: deviceWidth,
-                        height: deviceHeight / 20,
+                        width: context.width,
+                        height: context.height / 20,
                         decoration: BoxDecoration(
                             color: AppColors.kWhiteColor,
                             borderRadius: BorderRadius.circular(
@@ -154,10 +154,10 @@ class _HomeScreenState extends State<HomeScreen> {
                             AnimatedPositioned(
                               duration: const Duration(milliseconds: 200),
                               right: homeModelView.productAssetsIndex == 0
-                                  ? deviceWidth / 2
+                                  ? context.width / 2
                                   : 0,
                               left: homeModelView.productAssetsIndex == 1
-                                  ? deviceWidth / 2
+                                  ? context.width / 2
                                   : 0,
                               top: 0,
                               bottom: 0,
@@ -205,7 +205,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           ],
                         ),
                       ),
-                      SizedBox(height: deviceHeight / 50),
+                      SizedBox(height: context.height / 50),
                       homeModelView.productAssetsIndex == 0
                           ? homeModelView.inStockProductsList.isEmpty
                               ? SizedBox(

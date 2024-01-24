@@ -1,9 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:provider/provider.dart';
 import 'package:shop_management/firebase_options.dart';
 import 'package:shop_management/utils/constants/global.dart';
+import 'package:shop_management/utils/extentions/build_context_extention.dart';
 import 'package:shop_management/view/screens/auth/sign_in_screen.dart';
 import 'package:shop_management/view/screens/bottom_nav/bottom_nav.dart';
 import 'package:shop_management/view_model/auth_view_model.dart';
@@ -17,6 +19,7 @@ Future<void> main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  // configLoading();
   runApp(const MyApp());
 }
 
@@ -25,6 +28,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    deviceAverageSize = (context.height + context.width) / 2;
     return SafeArea(
       child: MultiProvider(
         providers: [
@@ -43,14 +47,14 @@ class MyApp extends StatelessWidget {
           // navigatorKey: navigatorKey,
           title: appName,
           theme: appTheme,
-          builder: (context, widget) {
-            deviceHeight = MediaQuery.sizeOf(context).height;
-            deviceWidth = MediaQuery.sizeOf(context).width;
-            deviceAverageSize = (deviceHeight + deviceWidth) / 2;
-            return MediaQuery(
-                data: MediaQuery.of(context).copyWith(),
-                child: widget ?? const SizedBox());
-          },
+          builder: EasyLoading.init(),
+          // builder: (context, widget) {
+          //   EasyLoading.init();
+          //   deviceAverageSize = (context.height + context.width) / 2;
+          //   return MediaQuery(
+          //       data: MediaQuery.of(context).copyWith(),
+          //       child: widget ?? const SizedBox());
+          // },
           home: FirebaseAuth.instance.currentUser == null
               ? const SignInScreen()
               : BottomNavigation(user: FirebaseAuth.instance.currentUser!),

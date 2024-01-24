@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shop_management/utils/constants/colors_const.dart';
 import 'package:shop_management/utils/constants/global.dart';
+import 'package:shop_management/utils/extentions/build_context_extention.dart';
 
 class AppButton extends StatelessWidget {
   const AppButton(
@@ -21,7 +22,7 @@ class AppButton extends StatelessWidget {
         style: ElevatedButton.styleFrom(
             elevation: elevation,
             surfaceTintColor: color ?? AppColors.kPrimaryColor,
-            fixedSize: Size(deviceWidth / 2, deviceHeight / 20)),
+            fixedSize: Size(context.width / 2,context.height / 20)),
         onPressed: onTap,
         child: Text(
           btnText,

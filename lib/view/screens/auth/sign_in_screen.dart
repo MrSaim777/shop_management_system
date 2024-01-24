@@ -7,7 +7,6 @@ import 'package:shop_management/utils/constants/global.dart';
 import 'package:shop_management/utils/extentions/build_context_extention.dart';
 import 'package:shop_management/utils/routes/cupertino_router.dart';
 import 'package:shop_management/view/screens/auth/sign_up_screen.dart';
-import 'package:shop_management/view/screens/bottom_nav/bottom_nav.dart';
 import 'package:shop_management/view/widgets/app_btn.dart';
 import 'package:shop_management/view/widgets/app_cupertino_textfield.dart';
 import 'package:shop_management/view_model/auth_view_model.dart';

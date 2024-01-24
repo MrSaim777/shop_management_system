@@ -51,7 +51,7 @@ class DetailScreen extends StatelessWidget {
                       hintText: ConstantStrings.purchasePrice,
                       textInputType: TextInputType.number,
                       prefixWidget: Padding(
-                        padding: EdgeInsets.only(left: deviceWidth / 20),
+                        padding: EdgeInsets.only(left: context.width / 20),
                         child: Text(
                           ConstantStrings.currency,
                           style: appTextStyle(
@@ -68,7 +68,7 @@ class DetailScreen extends StatelessWidget {
                       hintText: ConstantStrings.salePrice,
                       textInputType: TextInputType.number,
                       prefixWidget: Padding(
-                        padding: EdgeInsets.only(left: deviceWidth / 20),
+                        padding: EdgeInsets.only(left: context.width / 20),
                         child: Text(
                           ConstantStrings.currency,
                           style: appTextStyle(
@@ -92,7 +92,7 @@ class DetailScreen extends StatelessWidget {
                   ),
                   Expanded(
                     child: Container(
-                      margin: EdgeInsets.only(right: deviceWidth / 30),
+                      margin: EdgeInsets.only(right: context.width / 30),
                       decoration: BoxDecoration(
                           color: AppColors.kWhiteColor,
                           // boxShadow: boxShadow,
@@ -126,10 +126,10 @@ class DetailScreen extends StatelessWidget {
                   ),
                 ),
               ),
-              SizedBox(height: deviceHeight / 50),
+              SizedBox(height: context.height / 50),
               Container(
                 margin: EdgeInsets.symmetric(
-                  horizontal: deviceWidth / 20,
+                  horizontal: context.width / 20,
                 ),
                 decoration: BoxDecoration(
                     color: AppColors.kWhiteColor,

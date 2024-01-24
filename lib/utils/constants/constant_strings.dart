@@ -52,6 +52,7 @@ class ConstantStrings {
   static const String enterPassword = "Enter Password";
   static const String invalidPassword = "Invalid Password";
   static const String logoutSuccessfully = "Log out Successfully";
+  static const String loginSuccessfully = "Log in Successfully";
   // static const String  = "";
   // static const String  = "";
   // static const String  = "";

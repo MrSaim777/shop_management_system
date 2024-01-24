@@ -41,7 +41,9 @@ class AuthViewModel extends ChangeNotifier {
     } else if (pass.length < 8) {
       showFlushBar(context: context, message: ConstantStrings.invalidPassword);
     } else {
-      authRepository.signIn(context, email, pass);
+      authRepository
+          .signIn(context, email, pass)
+          .then((value) => value == true ? clearSignInFields() : null);
     }
   }
 
@@ -61,7 +63,7 @@ class AuthViewModel extends ChangeNotifier {
     }
   }
 
-  logout(BuildContext context){
+  logout(BuildContext context) {
     authRepository.logout(context);
   }
 
