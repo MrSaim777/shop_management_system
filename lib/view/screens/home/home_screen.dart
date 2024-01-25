@@ -222,15 +222,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                       SizedBox(height: context.height / 50),
                       homeModelView.productAssetsIndex == 0
-                          ?
-                          // homeModelView.inStockProductsList.isEmpty
-                          //     ? SizedBox(
-                          //         height: context.height / 2,
-                          //         child: const Center(
-                          //             child: Text(ConstantStrings.noProducts)),
-                          //       )
-                          //     :
-                          InStockProductsList(homeModelView: homeModelView)
+                          ? InStockProductsList(homeModelView: homeModelView)
                           : homeModelView.outOfStockProductsList.isEmpty
                               ? SizedBox(
                                   height: context.height / 2,

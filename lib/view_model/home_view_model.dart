@@ -1,20 +1,17 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:shop_management/model/asset_model.dart';
 import 'package:shop_management/model/product_model.dart';
 import 'package:shop_management/repository/product_repo.dart';
 import 'package:shop_management/utils/constants/constant_strings.dart';
 import 'package:shop_management/utils/flush_bar.dart';
 
 class HomeViewModel extends ChangeNotifier {
-  // FirebaseAuth firebaseAuth = FirebaseAuth.instance;
-  // FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
   ProductRepo productRepo = ProductRepo(
       firebaseAuth: FirebaseAuth.instance,
       firebaseFirestore: FirebaseFirestore.instance);
 
-  final Stream<QuerySnapshot> productssStream = FirebaseFirestore.instance
+  final Stream<QuerySnapshot> productsStream = FirebaseFirestore.instance
       .collection('users')
       .doc(FirebaseAuth.instance.currentUser!.email)
       .collection('products')
@@ -26,10 +23,6 @@ class HomeViewModel extends ChangeNotifier {
   bool get isSaveBtn => _isSaveBtn;
   int _productAssetsIndex = 0;
   int get productAssetsIndex => _productAssetsIndex;
-
-  // double containerPosition = 0.0;
-  // double minValue = 0.0;
-  // double maxValue = 100.0;
 
   final TextEditingController _productTextController = TextEditingController();
   TextEditingController get productTextController => _productTextController;
@@ -59,9 +52,12 @@ class HomeViewModel extends ChangeNotifier {
   DateTime _expiryDate = DateTime(0);
   DateTime get expirtDate => _expiryDate;
 
-  List<Product> inStockProductsList = [];
-  List<Product> outOfStockProductsList = [];
-  List<Asset> assetsList = [];
+  final List<Product> _inStockProductsList = [];
+  List<Product> get inStockProductsList => _inStockProductsList;
+
+  final List<Product> _outOfStockProductsList = [];
+  List<Product> get outOfStockProductsList => _outOfStockProductsList;
+
   String selectedType = "";
   String selectedWeightUnit = "";
   List<String> weightUnits = [
@@ -133,7 +129,6 @@ class HomeViewModel extends ChangeNotifier {
             weightUnit: selectedWeightUnit,
             addedAt: DateTime.now(),
             expiryDate: _expiryDate));
-
         clearValues();
         // notifyListeners();
       }
@@ -141,6 +136,18 @@ class HomeViewModel extends ChangeNotifier {
       showFlushBar(
           context: context, message: ConstantStrings.allFieldsRequired);
     }
+  }
+
+  Stream<List<Product>> getProducts() {
+    return productsStream.map((QuerySnapshot event) {
+      List<Product> productList = [];
+      for (var document in event.docs) {
+        var pr = Product.fromMap(document.data() as Map<String, dynamic>);
+        productList.add(pr);
+      }
+
+      return productList;
+    });
   }
 
   toggle() {
