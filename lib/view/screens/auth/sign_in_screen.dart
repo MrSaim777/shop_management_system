@@ -1,3 +1,4 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
@@ -45,14 +46,21 @@ class SignInScreen extends StatelessWidget {
           AppButton(
               onTap: () => provider.signIn(context),
               btnText: ConstantStrings.signIn),
-          TextButton(
-              onPressed: () => cupertinoRouter(context, const SignUpScreen()),
-              child: Text(
-                ConstantStrings.createNewAccount,
+          SizedBox(height: context.height / 50),
+          RichText(
+              text: TextSpan(children: [
+            TextSpan(
+                text: ConstantStrings.dontHaveAnAccount,
+                style: appTextStyle(color: AppColors.kTextColor)),
+            TextSpan(
+                recognizer: TapGestureRecognizer()
+                  ..onTap =
+                      () => cupertinoRouter(context, const SignUpScreen()),
+                text: ConstantStrings.signUp,
                 style: appTextStyle(
                     color: AppColors.kPrimaryColor,
-                    fontWeight: FontWeight.bold),
-              ))
+                    fontWeight: FontWeight.bold))
+          ])),
         ],
       ),
     );

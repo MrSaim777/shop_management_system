@@ -18,6 +18,7 @@ class ConstantStrings {
   static const String add = "Add";
   static const String selectType = "Select Type";
   static const String productAdded = "Product Added";
+  static const String productUpdated = "Product Updated";
   static const String assetAdded = "Asset Added";
   static const String writeName = "Write name";
   static const String noProducts = "No Products";
@@ -44,6 +45,7 @@ class ConstantStrings {
   static const String signIn = "Sign In";
   static const String signUp = "Sign Up";
   static const String createNewAccount = "Create New Account";
+  static const String dontHaveAnAccount = "Don't have an account?  ";
   static const String noInternet = "No Internet";
   static const String registerSuccessfully = "Regesiter Successfull";
   static const String logginSuccessfull = "Login Successfull";
@@ -53,7 +55,7 @@ class ConstantStrings {
   static const String invalidPassword = "Invalid Password";
   static const String logoutSuccessfully = "Log out Successfully";
   static const String loginSuccessfully = "Log in Successfully";
-  // static const String  = "";
+  static const String  someThingWentWrong= "Something went wrong";
   // static const String  = "";
   // static const String  = "";
   // static const String  = "";

@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -7,14 +9,12 @@ import 'package:shop_management/utils/constants/constant_strings.dart';
 import 'package:shop_management/utils/flush_bar.dart';
 
 class HomeViewModel extends ChangeNotifier {
-  ProductRepo productRepo = ProductRepo(
-      firebaseAuth: FirebaseAuth.instance,
-      firebaseFirestore: FirebaseFirestore.instance);
+  ProductRepo productRepo = ProductRepo();
 
   final Stream<QuerySnapshot> productsStream = FirebaseFirestore.instance
-      .collection('users')
+      .collection('Users')
       .doc(FirebaseAuth.instance.currentUser!.email)
-      .collection('products')
+      .collection('Products')
       .snapshots();
 
   bool _isFloatingBtnPressed = false;
@@ -84,27 +84,29 @@ class HomeViewModel extends ChangeNotifier {
   }
 
   void increaseSoldQuantity(Product product, double amount) {
-    product.increaseSoldQuantity(amount);
-    notifyListeners();
+    if (amount > 0 && product.soldQuantity > 0) {
+      product.quantity += amount;
+      product.soldQuantity -= amount;
+      productRepo.updateQuantity(
+          product, product.soldQuantity, product.quantity);
+    } else {
+      log("Invalid quantity increase");
+    }
   }
 
   void decreaseSoldQuantity(Product product, double amount) {
-    product.decreaseSoldQuantity(amount);
-    if (product.quantity == 0) {
-      final p = Product(
-          id: product.id,
-          name: product.name,
-          description: product.description,
-          purchasePrice: product.purchasePrice,
-          salePrice: product.salePrice,
-          quantity: product.quantity,
-          weightUnit: product.weightUnit,
-          addedAt: product.addedAt,
-          expiryDate: product.expiryDate);
-      outOfStockProductsList.add(p);
-      inStockProductsList.removeWhere((e) => e.id == product.id);
+    if (amount > 0 && amount <= product.quantity) {
+      product.quantity -= amount;
+      product.soldQuantity += amount;
+      productRepo.updateQuantity(
+          product, product.soldQuantity, product.quantity);
+    } else {
+      log("Invalid quantity decrease");
     }
-    notifyListeners();
+
+    if (product.quantity == 0) {
+      //remove prod from stock and add in out of stock
+    }
   }
 
   addToList(BuildContext context) {
@@ -145,7 +147,6 @@ class HomeViewModel extends ChangeNotifier {
         var pr = Product.fromMap(document.data() as Map<String, dynamic>);
         productList.add(pr);
       }
-
       return productList;
     });
   }

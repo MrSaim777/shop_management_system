@@ -20,7 +20,11 @@ class InStockProductsList extends StatelessWidget {
       stream: homeModelView.getProducts(),
       builder: (BuildContext context, AsyncSnapshot<List<Product>> snapshot) {
         if (snapshot.hasError) {
-          return const Text('Something went wrong');
+          return SizedBox(
+            height: context.height / 2,
+            child:
+                const Center(child: Text(ConstantStrings.someThingWentWrong)),
+          );
         }
 
         if (snapshot.connectionState == ConnectionState.waiting) {
@@ -138,104 +142,3 @@ class InStockProductsList extends StatelessWidget {
     );
   }
 }
-
-// return ListView.builder(
-//           physics: const NeverScrollableScrollPhysics(),
-//           shrinkWrap: true,
-//           itemCount: snapshot.data!.docs.length,
-//           itemBuilder: (context, index) {
-//             return GestureDetector(
-//               onTap: () =>
-//                   cupertinoRouter(context, DetailScreen(product: list)),
-//               child: Container(
-//                 margin: EdgeInsets.symmetric(vertical: context.height / 200),
-//                 decoration: BoxDecoration(
-//                     color: AppColors.kWhiteColor,
-//                     borderRadius: BorderRadius.circular(10)),
-//                 child: ListTile(
-//                     leading: CircleAvatar(
-//                         backgroundColor: AppColors.kPrimaryColor,
-//                         child: Text(
-//                           list.name[0].toUpperCase(),
-//                           style: appTextStyle(
-//                               color: AppColors.kWhiteColor,
-//                               fontWeight: FontWeight.bold),
-//                         )),
-//                     title: Text(
-//                       list.name,
-//                       style: appTextStyle(
-//                           fontWeight: FontWeight.bold,
-//                           color: AppColors.kBlackColor),
-//                     ),
-//                     subtitle: Column(
-//                         crossAxisAlignment: CrossAxisAlignment.start,
-//                         children: [
-//                           list.description.isEmpty
-//                               ? const SizedBox.shrink()
-//                               : Text(
-//                                   list.description,
-//                                   style: appTextStyle(),
-//                                 ),
-//                           Text(
-//                             "${list.quantity} ${list.weightUnit}",
-//                             style: appTextStyle(fontSize: 0.02),
-//                           )
-//                         ]),
-//                     trailing: Container(
-//                       width: context.width / 2.8,
-//                       height: context.height / 30,
-//                       decoration: BoxDecoration(
-//                           color: AppColors.kScaffoldColor,
-//                           borderRadius: BorderRadius.circular(50)),
-//                       child: Row(
-//                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//                         children: [
-//                           InkWell(
-//                             onTap: () =>
-//                                 homeModelView.increaseSoldQuantity(list, 1),
-//                             child: Container(
-//                               width: context.width / 10,
-//                               decoration: const BoxDecoration(
-//                                   color: AppColors.kPrimaryColor,
-//                                   borderRadius: BorderRadius.only(
-//                                       topLeft: Radius.circular(50),
-//                                       bottomLeft: Radius.circular(50))),
-//                               child: Center(
-//                                   child: FaIcon(
-//                                 FontAwesomeIcons.minus,
-//                                 size: context.width / 25,
-//                                 color: AppColors.kWhiteColor,
-//                               )),
-//                             ),
-//                           ),
-//                           Padding(
-//                             padding: EdgeInsets.symmetric(
-//                                 vertical: context.height / 150),
-//                             child: Text(list.soldQuantity.toString()),
-//                           ),
-//                           InkWell(
-//                             onTap: () =>
-//                                 homeModelView.decreaseSoldQuantity(list, 1),
-//                             child: Container(
-//                               width: context.width / 10,
-//                               decoration: const BoxDecoration(
-//                                   color: AppColors.kPrimaryColor,
-//                                   borderRadius: BorderRadius.only(
-//                                       topRight: Radius.circular(50),
-//                                       bottomRight: Radius.circular(50))),
-//                               child: Center(
-//                                   child: FaIcon(
-//                                 FontAwesomeIcons.plus,
-//                                 size: context.width / 25,
-//                                 color: AppColors.kWhiteColor,
-//                               )),
-//                             ),
-//                           )
-//                         ],
-//                       ),
-//                     )),
-//               ),
-//             );
-//           },
-//         );
-

@@ -1,6 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
-import 'dart:developer';
 
 class Product {
   final int id;
@@ -28,24 +27,24 @@ class Product {
   });
 
   // Method to increase the quantity
-  void increaseSoldQuantity(double amount) {
-    if (amount > 0 && soldQuantity > 0) {
-      quantity += amount;
-      soldQuantity -= amount;
-    } else {
-      log("Invalid quantity increase");
-    }
-  }
+  // void increaseSoldQuantity(double amount) {
+    // if (amount > 0 && soldQuantity > 0) {
+    //   quantity += amount;
+    //   soldQuantity -= amount;
+    // } else {
+    //   log("Invalid quantity increase");
+    // }
+  // }
 
   // Method to decrease the quantity and increase sold quantity
-  void decreaseSoldQuantity(double amount) {
-    if (amount > 0 && amount <= quantity) {
-      quantity -= amount;
-      soldQuantity += amount; // Increase sold quantity
-    } else {
-      log("Invalid quantity decrease");
-    }
-  }
+  // void decreaseSoldQuantity(double amount) {
+  //   if (amount > 0 && amount <= quantity) {
+  //     quantity -= amount;
+  //     soldQuantity += amount; // Increase sold quantity
+  //   } else {
+  //     log("Invalid quantity decrease");
+  //   }
+  // }
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
