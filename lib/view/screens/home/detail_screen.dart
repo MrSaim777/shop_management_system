@@ -2,7 +2,7 @@ import 'package:animated_custom_dropdown/custom_dropdown.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
-import 'package:shop_management/model/product_model.dart';
+import 'package:shop_management/model/product.dart';
 import 'package:shop_management/utils/constants/colors_const.dart';
 import 'package:shop_management/utils/constants/constant_strings.dart';
 import 'package:shop_management/utils/constants/global.dart';

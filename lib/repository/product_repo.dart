@@ -1,7 +1,8 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:shop_management/model/product_model.dart';
+import 'package:shop_management/model/product.dart';
+import 'package:shop_management/model/profit.dart';
 import 'package:shop_management/utils/constants/constant_strings.dart';
 import 'dart:developer';
 
@@ -17,6 +18,10 @@ class ProductRepo {
       .collection('Users')
       .doc(FirebaseAuth.instance.currentUser!.email)
       .collection('OOS_Products');
+  CollectionReference profitCollection = FirebaseFirestore.instance
+      .collection('Users')
+      .doc(FirebaseAuth.instance.currentUser!.email)
+      .collection('Profit');
 
   Future<void> addProduct(Product product) {
     return productCollection
@@ -77,6 +82,21 @@ class ProductRepo {
       'expiryDate': product.expiryDate.millisecondsSinceEpoch,
     }).then(
         (value) => log("product updated: ${ConstantStrings.productUpdated}"));
+  }
+
+  Future<void> addProfit(Profit profit) {
+    return profitCollection.add({
+      'expenses': profit.expenses,
+      'income': profit.income,
+      'profit': profit.profit,
+      'netProfit': profit.netProfit,
+      'date': profit.date,
+    });
+    // .then((value) => showSuccessMessage(ConstantStrings.productAdded))
+    // .catchError((error) {
+    // showFailureMessage("Failed to add profit: $error");
+    // log("Failed to add profit: $error");
+    // });
   }
 
   // getProducts(){

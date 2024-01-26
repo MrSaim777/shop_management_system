@@ -3,14 +3,14 @@ import 'dart:developer';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:shop_management/model/product_model.dart';
+import 'package:shop_management/model/product.dart';
+import 'package:shop_management/model/profit.dart';
 import 'package:shop_management/repository/product_repo.dart';
 import 'package:shop_management/utils/constants/constant_strings.dart';
 import 'package:shop_management/utils/flush_bar.dart';
 
 class HomeViewModel extends ChangeNotifier {
   ProductRepo productRepo = ProductRepo();
-
   final Stream<QuerySnapshot> productsStream = FirebaseFirestore.instance
       .collection('Users')
       .doc(FirebaseAuth.instance.currentUser!.email)
@@ -89,6 +89,12 @@ class HomeViewModel extends ChangeNotifier {
       product.soldQuantity -= amount;
       productRepo.updateQuantity(
           product, product.soldQuantity, product.quantity);
+      // productRepo.addProfit(Profit(
+      //     expenses: product.salePrice - product.purchasePrice,
+      //     income: product.salePrice - product.purchasePrice,
+      //     profit: product.salePrice - product.purchasePrice,
+      //     netProfit: product.salePrice - product.purchasePrice,
+      //     date: DateTi));
     } else {
       log("Invalid quantity increase");
     }
